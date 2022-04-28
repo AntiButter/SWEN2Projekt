@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourPlanner_Lercher_Polley.ViewModels;
 
-namespace Tourplanner_Lercher_Polley
+namespace TourPlanner_Lercher_Polley
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +24,7 @@ namespace Tourplanner_Lercher_Polley
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MediaFolderVM();
         }
     }
 }

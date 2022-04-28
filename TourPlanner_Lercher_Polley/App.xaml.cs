@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Tourplanner_Lercher_Polley
+namespace TourPlanner_Lercher_Polley
 {
     /// <summary>
     /// Interaction logic for App.xaml
