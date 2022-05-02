@@ -7,18 +7,18 @@ using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer
 {
-      public class MediaItemDAO
+    public class TourDataAccess
     {
-        private IDataAccess dataAccess;
-        public MediaItemDAO()
+        private DBConnection dataAccess;
+        public TourDataAccess()
         {
-            //check which data source for example (potential if/switch)
             dataAccess = new DBConnection();
         }
-        public List<MediaItem> GetItems()
+        
+        public List<Tour> GetItems()
         {
-            return dataAccess.GetItems();
+            return dataAccess.getTours();
         }
-            
+        
     }
 }
