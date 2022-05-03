@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TourPlanner.Models.Enum
 {
-    public enum TransportTypeEnum
+    public enum TransportType
     {
         bike,
         hike,

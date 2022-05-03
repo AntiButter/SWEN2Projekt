@@ -9,15 +9,16 @@ namespace TourPlanner.DataAccessLayer
 {
     public class TourDataAccess
     {
-        private DBConnection dataAccess;
+        private DB dataAccess;
         public TourDataAccess()
         {
-            dataAccess = new DBConnection();
+            dataAccess = DB.getInstance();
         }
         
         public List<Tour> GetItems()
         {
-            return dataAccess.getTours();
+            return dataAccess.getToursStatic();
+            //return dataAccess.getTours();
         }
         
     }

@@ -24,7 +24,7 @@ namespace TourPlanner_Lercher_Polley
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MediaFolderVM();
+            this.DataContext = new TourPlannerViewModel();
         }
     }
 }
