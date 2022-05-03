@@ -17,8 +17,8 @@ namespace TourPlanner.DataAccessLayer
         
         public List<Tour> GetItems()
         {
-            return dataAccess.getToursStatic();
-            //return dataAccess.getTours();
+            //return dataAccess.getToursStatic();
+            return dataAccess.getTours();
         }
         
     }
