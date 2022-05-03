@@ -1,0 +1,37 @@
+create table tour
+(
+    tourid              serial
+        constraint tour_pk
+            primary key,
+    name                varchar not null,
+    description         varchar,
+    "from"              varchar not null,
+    "to"                varchar not null,
+    "transportType"     varchar,
+    distance            real,
+    time                integer,
+    popularity          integer,
+    "childFriendliness" integer
+);
+
+alter table tour
+    owner to postgres;
+
+create table "tourLogs"
+(
+    "logID"     serial
+        constraint tourlogs_pk
+            primary key,
+    "logTime"   timestamp not null,
+    comment     varchar,
+    difficulty  integer   not null,
+    "totalTime" integer   not null,
+    rating      integer   not null,
+    "tourIDFK"  integer
+        constraint tourlogs_tour_tourid_fk
+            references tour
+            on update cascade on delete cascade
+);
+
+alter table "tourLogs"
+    owner to postgres;
