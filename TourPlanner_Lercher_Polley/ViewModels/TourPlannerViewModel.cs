@@ -3,15 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using TourPlanner.BusinessLayer;
 using TourPlanner.Models;
 using TourPlanner.Models.Enum;
 using TourPlanner_Lercher_Polley.ViewModels;
+using System.Windows.Controls;
+using System.Threading;
 
 namespace TourPlanner_Lercher_Polley.ViewModels
 {
@@ -33,6 +37,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         //private string tourPop;
         private string tourType;
         private string tourDescription;
+        private string tourPicture;
 
         public ICommand SearchCommand => searchCommand ??= new RelayCommand(Search);
         public ICommand ClearListCommand => clearListCommand ??= new RelayCommand(ClearList);
@@ -95,6 +100,10 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             get { return tourDescription; }
         }
+        public string TourPicture
+        {
+            get { return tourPicture; }
+        }
         public TourPlannerViewModel()
         {
             tourGetter = new TourGetter();
@@ -102,7 +111,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             Items = new ObservableCollection<Tour>();
 
             //test
-            tourCreator.addNewTour("Tour", "yo hallo", "Mödling", "Leobersdorf", TransportType.running);
+            //tourCreator.addNewTour("TourNew", "Lorem ipsum dolor sgre", "Linz", "Steyr", TransportType.vacation);
 
             LoadList();
         }
@@ -115,12 +124,30 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             tourTo = currentItem.To;
             tourFrom = currentItem.From;
             tourTime = currentItem.EstimatedTime;
+            //tourPicture = "../../../../Pictures/TourID" + currentItem.ID + ".png";
+            //tourPicture.UriSource = resourceUri;
+            //tourPicture = "..\\..\\..\\..\\Pictures\\TourID38.png";
+            //tourPicture = "pack://TourPlanner_Lercher_Polley:,,,,/Pictures/TourID38.png";
+
+            //tourPicture = new Bitmap("../../../../Pictures/TourID" + currentItem.ID + ".png");   
+
+            //var tourPicture = new Bitmap(Image.FromFile("../../../../Pictures/TourID" + currentItem.ID + ".png"));
+            //var tourPicture = new Bitmap(Image.FromFile("Pictures/TourID44.png"));
+            //Uri resourceUri = new Uri("../../../../Pictures/TourID" + currentItem.ID + ".png", UriKind.Relative);
+            //Uri resourceUri = new Uri("../../../../Pictures/TourID" + currentItem.ID + ".png", UriKind.Relative);
+
+            tourPicture = Path.GetFullPath("../../../../Pictures/TourID" + currentItem.ID + ".png");
+
             RaisePropertyChangedEvent(nameof(TourName));
             RaisePropertyChangedEvent(nameof(TourTime));
             RaisePropertyChangedEvent(nameof(TourTo));
             RaisePropertyChangedEvent(nameof(TourType));
             RaisePropertyChangedEvent(nameof(TourFrom));
             RaisePropertyChangedEvent(nameof(TourDescription));
+            RaisePropertyChangedEvent(nameof(TourPicture));
+
+            //tourPicture = null;
+            //RaisePropertyChangedEvent(nameof(TourPicture));
         }        
         private void ClearTourDetails()
         {
@@ -130,12 +157,14 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             tourTo = "";
             tourFrom = "";
             tourTime = "";
+            tourPicture = "";
             RaisePropertyChangedEvent(nameof(TourName));
             RaisePropertyChangedEvent(nameof(TourTime));
             RaisePropertyChangedEvent(nameof(TourTo));
             RaisePropertyChangedEvent(nameof(TourType));
             RaisePropertyChangedEvent(nameof(TourFrom));
             RaisePropertyChangedEvent(nameof(TourDescription));
+            RaisePropertyChangedEvent(nameof(TourPicture));
         }
         private void LoadList()
         {
