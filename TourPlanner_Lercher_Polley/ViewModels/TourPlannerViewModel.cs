@@ -26,6 +26,14 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private ICommand clearListCommand;
         private string searchName;
         private string tourName;
+        private string tourFrom;
+        private string tourTo;
+        private string tourTime;
+        //private string tourFriend;
+        //private string tourPop;
+        private string tourType;
+        private string tourDescription;
+
         public ICommand SearchCommand => searchCommand ??= new RelayCommand(Search);
         public ICommand ClearListCommand => clearListCommand ??= new RelayCommand(ClearList);
 
@@ -58,11 +66,35 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             }
         }
 
+        public string TourFrom
+        {
+            get { return tourFrom; }
+        }
+
+        public string TourTo
+        {
+            get { return tourTo; }
+        }
+
+        public string TourTime
+        {
+            get { return tourTime; }
+        }
+        //private string tourFriend;
+        //private string tourPop;
+        
+        public string TourType
+        {
+            get { return tourType; }
+        }
         public string TourName
         {
             get { return tourName; }
         }
-
+        public string TourDescription
+        {
+            get { return tourDescription; }
+        }
         public TourPlannerViewModel()
         {
             tourGetter = new TourGetter();
@@ -78,12 +110,32 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private void UpdateTourDetails()
         {
             tourName = currentItem.Name;
+            tourDescription = currentItem.Description;
+            tourType = currentItem.TransportType.ToString();
+            tourTo = currentItem.To;
+            tourFrom = currentItem.From;
+            tourTime = currentItem.EstimatedTime;
             RaisePropertyChangedEvent(nameof(TourName));
+            RaisePropertyChangedEvent(nameof(TourTime));
+            RaisePropertyChangedEvent(nameof(TourTo));
+            RaisePropertyChangedEvent(nameof(TourType));
+            RaisePropertyChangedEvent(nameof(TourFrom));
+            RaisePropertyChangedEvent(nameof(TourDescription));
         }        
         private void ClearTourDetails()
         {
             tourName = "";
+            tourDescription ="" ;
+            tourType = "";
+            tourTo = "";
+            tourFrom = "";
+            tourTime = "";
             RaisePropertyChangedEvent(nameof(TourName));
+            RaisePropertyChangedEvent(nameof(TourTime));
+            RaisePropertyChangedEvent(nameof(TourTo));
+            RaisePropertyChangedEvent(nameof(TourType));
+            RaisePropertyChangedEvent(nameof(TourFrom));
+            RaisePropertyChangedEvent(nameof(TourDescription));
         }
         private void LoadList()
         {
