@@ -69,11 +69,7 @@ namespace TourPlanner.DataAccessLayer
                         
 
 
-                        tourList.Add(new Tour((string)reader["name"],
-                                              description,
-                                              (string)reader["fromDB"],
-                                              (string)reader["toDB"],
-                                              (TransportType)Enum.Parse(typeof(TransportType), reader["transportType"].ToString())));
+                        tourList.Add(new Tour((int)reader["tourid"], (string)reader["name"], description, (string)reader["fromDB"], (string)reader["toDB"], (TransportType)Enum.Parse(typeof(TransportType), reader["transportType"].ToString()), (double)reader["distance"], (string)reader["time"]));
                     }
                 }
 

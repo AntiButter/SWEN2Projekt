@@ -54,6 +54,7 @@ namespace TourPlanner.BusinessLayer
             double distanceMiles = (int)pageContent.SelectToken("route.distance");
             //convert miles to km
             double distance = distanceMiles * 1.60934;
+            distance = Math.Round(distance,2); 
 
             //time
             string time = (string)pageContent.SelectToken("route.formattedTime");
