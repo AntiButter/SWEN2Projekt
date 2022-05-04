@@ -17,11 +17,12 @@ namespace TourPlanner.BusinessLayer
         {
             Tour newTour = new Tour(name, description, from, to, transportType);
 
-            newTour.ID = tourDataAccess.getNextValTour();
+            //get (and reserve) the next value from the DB and set it to the object (for picture file naming)
+            newTour.setID(tourDataAccess.getNextValTour());
 
-            //geht noch nicht, aus irgendeinem Grund gibts nen endlos loop im API call
-            //mapQuestAPIRequest(newTour);
-            
+            mapQuestAPIRequest(newTour);
+
+            addTourToDB(newTour);
         }
 
         private void mapQuestAPIRequest (Tour tour)
@@ -31,9 +32,9 @@ namespace TourPlanner.BusinessLayer
             //throw new NotImplementedException("ende");
         }
 
-        private void completeTourInDatabase()
+        private void addTourToDB(Tour tour)
         {
-            throw new NotImplementedException ();   
+            tourDataAccess.addTourToDB(tour);   
         }
     }
 }

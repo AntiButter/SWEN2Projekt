@@ -40,21 +40,12 @@ namespace TourPlanner.BusinessLayer
                 routeType = "pedestrian";
             }
 
+
             string directionURL = "http://www.mapquestapi.com/directions/v2/route?key=" + key + "&from=" + currentTour.From + "&to=" + currentTour.To + "&routeType=" + routeType;
+;
+            //throw new Exception(directionURL);
 
-            HttpResponseMessage? response;
-
-            try
-            {
-                response = await client.GetAsync(directionURL);
-            }
-            catch (Exception exception)
-            {
-                throw new NotImplementedException($"Exception when retrieving stuff {exception}");
-            }
-
-            throw new NotImplementedException(directionURL);
-
+            var response = await client.GetAsync(directionURL).ConfigureAwait(false);
 
             JObject pageContent = JObject.Parse(await response.Content.ReadAsStringAsync());
 
@@ -66,9 +57,9 @@ namespace TourPlanner.BusinessLayer
 
             //time
             string time = (string)pageContent.SelectToken("route.formattedTime");
-            int timeSeconds = UtilityFunctions.getTimeFromString(time);
 
-
+            //save in Tour object
+            currentTour.addMapQuestData(distance, time);
 
 
             //Static API
@@ -86,7 +77,7 @@ namespace TourPlanner.BusinessLayer
 
             Image tourImage = (Image)new ImageConverter().ConvertFrom(client.GetByteArrayAsync(staticURL).Result);
 
-            string path = "Pictures/TourID"+currentTour.ID+".png";
+            string path = "../../../../Pictures/TourID"+currentTour.ID+".png";
 
             tourImage.Save(path);
 

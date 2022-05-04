@@ -25,6 +25,12 @@ namespace TourPlanner.DataAccessLayer
         { 
             return dataAccess.getNextValTour();
         } 
-        
+
+        public void addTourToDB(Tour tour)
+        {
+            dataAccess.addTourToDB(tour);
+        }
+
+
     }
 }

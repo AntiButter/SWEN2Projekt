@@ -68,10 +68,11 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             tourGetter = new TourGetter();
             tourCreator = new TourCreator();
             Items = new ObservableCollection<Tour>();
-            LoadList();
 
             //test
-            tourCreator.addNewTour("testProgramm", "yo hallo", "Wien", "Leobersdorf", TransportType.running);
+            tourCreator.addNewTour("Tour", "yo hallo", "Mödling", "Leobersdorf", TransportType.running);
+
+            LoadList();
         }
 
         private void UpdateTourDetails()

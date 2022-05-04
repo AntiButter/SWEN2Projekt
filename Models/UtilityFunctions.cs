@@ -16,18 +16,5 @@ namespace TourPlanner.Models
 
             return isNull;
         }
-
-        public static int getTimeFromString(string time)
-        {
-            int newTime = 0;
-
-            string[] subStrings = time.Split(':');
-
-            newTime += Int32.Parse(subStrings[0]) * 60 * 60;
-            newTime += Int32.Parse(subStrings[1]) * 60;
-            newTime += Int32.Parse(subStrings[2]);
-
-            return newTime;
-        }
     }
 }

@@ -16,8 +16,7 @@ namespace TourPlanner.Models
         public string To { get; set; }
         public TransportType TransportType { get; set; } 
         public double? TourDistance { get; set; } //saved as kilometer //from MapQuestAPI
-        public int? EstimatedTime { get; set; } //saved as minute, later potentially converted to hours ? // from MapQuestAPI
-        //public xxxx? TourMap { get; set; } //the picture //where do we save it ? // from MapQuestAPI
+        public string? EstimatedTime { get; set; } //saved as string // from MapQuestAPI
         public int? Popularity { get; set; } // 1 - 5   //calculated afterwards
         public int? ChildFriendliness { get; set; } // 1 - 5   //calculated afterwards
         public int? ID { get; set; } //from Database
@@ -32,18 +31,32 @@ namespace TourPlanner.Models
             TransportType = transportType;
             TourDistance = null;
             EstimatedTime = null;
-            //TourMap = null;
+            ID = null;
+        }        
+        //second constructor, constructs complete Tour object
+        public Tour(int id, string name, string? description, string from, string to, TransportType transportType, double tourDistance, string estimatedTime)
+        {
+            ID = id;
+            Name = name;
+            Description = description;
+            From = from;
+            To = to;
+            TransportType = transportType;
+            TourDistance = tourDistance;
+            EstimatedTime = estimatedTime;
         }
 
         //adds the data from the MapQuestAPI
-        public void addMapQuestData( /*mapquestdata*/)
+        public void addMapQuestData( double tourDistance, string estimatedTime)
         {
-            throw new NotImplementedException();
-            //TourDistance = null;
-            //EstimatedTime = null;
-            //TourMap = null;
+            TourDistance = tourDistance;
+            EstimatedTime = estimatedTime;
         }
 
+        public void setID (int id)
+        {
+            ID = id;
+        }           
         public void setPopularity ()
         {
             throw new NotImplementedException();
