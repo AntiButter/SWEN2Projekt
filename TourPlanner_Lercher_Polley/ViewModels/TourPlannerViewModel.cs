@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlanner.BusinessLayer;
 using TourPlanner.Models;
+using TourPlanner.Models.Enum;
 using TourPlanner_Lercher_Polley.ViewModels;
 
 namespace TourPlanner_Lercher_Polley.ViewModels
@@ -17,6 +18,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
     public class TourPlannerViewModel : ViewModelBase
     {
         private IEnumerable<Tour> allTours;
+        private TourGetter tourGetter;
         private TourCreator tourCreator;
 
         private Tour currentItem;
@@ -63,9 +65,13 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         public TourPlannerViewModel()
         {
+            tourGetter = new TourGetter();
             tourCreator = new TourCreator();
             Items = new ObservableCollection<Tour>();
             LoadList();
+
+            //test
+            tourCreator.addNewTour("testProgramm", "yo hallo", "Wien", "Leobersdorf", TransportType.running);
         }
 
         private void UpdateTourDetails()
@@ -80,7 +86,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         }
         private void LoadList()
         {
-            allTours = tourCreator.GetItems();
+            allTours = tourGetter.GetItems();
             foreach (Tour item in allTours)
             {
                 Items.Add(item);
@@ -89,7 +95,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         private void Search(object commandParameter)
         {
-            IEnumerable foundItems = tourCreator.Search(SearchName);
+            IEnumerable foundItems = tourGetter.Search(SearchName);
             Items.Clear();
             foreach (Tour item in foundItems)
             {

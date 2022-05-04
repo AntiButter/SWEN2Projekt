@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.DataAccessLayer;
 using TourPlanner.Models;
+using TourPlanner.Models.Enum;
 
 namespace TourPlanner.BusinessLayer
 {
@@ -12,16 +13,27 @@ namespace TourPlanner.BusinessLayer
     {
         private TourDataAccess tourDataAccess = new TourDataAccess();
 
-        public IEnumerable<Tour> Search(string itemName)
+        public void addNewTour (string name, string? description, string from, string to, TransportType transportType)
         {
-            IEnumerable<Tour> items = GetItems();
+            Tour newTour = new Tour(name, description, from, to, transportType);
 
-            return items.Where(x => x.Name.ToLower().Contains(itemName.ToLower()));
+            newTour.ID = tourDataAccess.getNextValTour();
+
+            //geht noch nicht, aus irgendeinem Grund gibts nen endlos loop im API call
+            //mapQuestAPIRequest(newTour);
+            
         }
 
-        public IEnumerable<Tour> GetItems()
+        private void mapQuestAPIRequest (Tour tour)
         {
-            return tourDataAccess.GetItems();
+            _ = new MapQuestAPICall(tour);  
+
+            //throw new NotImplementedException("ende");
+        }
+
+        private void completeTourInDatabase()
+        {
+            throw new NotImplementedException ();   
         }
     }
 }

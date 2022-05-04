@@ -65,7 +65,7 @@ namespace TourPlanner.DataAccessLayer
                     tourList = new List<Tour>();
                     while (reader.Read())
                     {
-                        string? description = checkNull(reader["description"].ToString());
+                        string? description = UtilityFunctions.checkNull(reader["description"].ToString());
                         
 
 
@@ -82,13 +82,19 @@ namespace TourPlanner.DataAccessLayer
             }
         }
 
-        //check if certain data is null
-        private string? checkNull(string isNull)
+        public int getNextValTour()
         {
-            if (isNull == "") 
-                return null;  
-            
-            return isNull;  
+            Connect();
+            using (var sql = new NpgsqlCommand("SELECT nextval('tour_tourid_seq')", Connection))
+            {
+                NpgsqlDataReader reader = sql.ExecuteReader();
+
+                reader.Read();
+                int nextVal = (int)(long)reader["nextval"];
+
+                Disconnect();
+                return nextVal;
+            }
         }
 
     }

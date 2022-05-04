@@ -20,6 +20,11 @@ namespace TourPlanner.DataAccessLayer
             //return dataAccess.getToursStatic();
             return dataAccess.getTours();
         }
+
+        public int getNextValTour()
+        { 
+            return dataAccess.getNextValTour();
+        } 
         
     }
 }
