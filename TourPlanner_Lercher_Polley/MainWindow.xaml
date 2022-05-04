@@ -39,14 +39,14 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label FontSize="10" Content="Tour Name: " Grid.Row="0" Grid.Column="0" Margin="5,5,5,5"></Label>
+            <Label FontSize="10" Content="Tour Name: " Grid.Row="0" Grid.Column="0" Margin="5,5,5,5" HorizontalContentAlignment="Right"></Label>
             <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding TourName}" Margin="5,5,5,5"></TextBlock>
-            <Label FontSize="10" Content="From: " Grid.Row="1" Margin="5,5,5,5"></Label>
+            <Label FontSize="10" Content="From: " Grid.Row="1" Margin="5,5,5,5" HorizontalContentAlignment="Right"></Label>
             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding TourFrom}" Margin="5,5,5,5"/>
-            <Label FontSize="10" Content="To: " Grid.Row="2" Margin="5,5,5,5"></Label>
+            <Label FontSize="10" Content="To: " Grid.Row="2" Margin="5,5,5,5" HorizontalContentAlignment="Right"></Label>
             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding TourTo}" Margin="5,5,5,5"></TextBlock>
             <Image Source="{Binding TourPicture}" HorizontalAlignment="Right" Width="300" Height="150" Grid.Row="5" Grid.Column="1" Margin="5,5,5,5"></Image>
-            <Label Grid.Row="3" Content="Description: " FontSize="10"></Label>
+            <Label FontSize="10" Grid.Row="3" Content="Description: " Grid.Column="0" HorizontalContentAlignment="Right"></Label>
             <TextBlock Grid.Row="3" Grid.RowSpan="2" Grid.Column="1"></TextBlock>
             <Grid Margin="0,10,317,42" Grid.Row="5" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
@@ -69,6 +69,7 @@
                 <Label Content="Popularity:" Grid.Row="3"></Label>
                 <TextBlock Text="{Binding TourPop}" Grid.Row="3" Grid.Column="1"></TextBlock>
             </Grid>
+            <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Margin="5,118,0,-81" HorizontalAlignment="Left" Width="594" ></DataGrid>
         </Grid>
     </Grid>
 </Window>
