@@ -33,6 +33,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -46,7 +47,28 @@
             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding}" Margin="5,5,5,5"></TextBlock>
             <Image Source="{Binding TourPicture}" HorizontalAlignment="Right" Width="300" Height="150" Grid.Row="5" Grid.Column="1" Margin="5,5,5,5"></Image>
             <Label Grid.Row="3" Content="Description: " FontSize="10"></Label>
-            <TextBlock Grid.Row="3" Grid.Column="1"></TextBlock>
+            <TextBlock Grid.Row="3" Grid.RowSpan="2" Grid.Column="1"></TextBlock>
+            <Grid Margin="0,10,317,42" Grid.Row="5" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="Type: " Grid.Row="0" Grid.Column="0"></Label>
+                <TextBlock Text="{Binding TourType}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                <Label Content="Time: " Grid.Row="1" Grid.Column="0"></Label>
+                <TextBlock Text="{Binding TourTime}" Grid.Row="1" Grid.Column="1"></TextBlock>
+                <Label Content="Child Friendliness: " Grid.Row="2" Grid.Column="0"></Label>
+                <TextBlock Text="{Binding TourFriend}" Grid.Row="2" Grid.Column="1"></TextBlock>
+                <Label Content="Popularity:" Grid.Row="3"></Label>
+                <TextBlock Text="{Binding TourPop}" Grid.Row="3" Grid.Column="1"></TextBlock>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
