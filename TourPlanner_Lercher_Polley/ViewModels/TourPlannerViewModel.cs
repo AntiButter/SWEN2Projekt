@@ -43,6 +43,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public ICommand ClearListCommand => clearListCommand ??= new RelayCommand(ClearList);
 
         public ObservableCollection<Tour> Items { get; set; }
+
         public string SearchName
         {
             get { return searchName; }
@@ -111,7 +112,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             Items = new ObservableCollection<Tour>();
 
             //test
-            //tourCreator.addNewTour("TourNew", "Lorem ipsum dolor sgre", "Linz", "Steyr", TransportType.vacation);
+            //tourCreator.addNewTour("WienTour", "Wiener Spaziergang", "Sopron", "Eisenstadt", TransportType.running);
 
             LoadList();
         }
