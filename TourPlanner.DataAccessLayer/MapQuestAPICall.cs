@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.Models;
 
-namespace TourPlanner.BusinessLayer
+namespace TourPlanner.DataAccessLayer
 {
     public class MapQuestAPICall
     {

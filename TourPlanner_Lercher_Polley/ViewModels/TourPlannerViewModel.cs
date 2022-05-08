@@ -112,7 +112,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             Items = new ObservableCollection<Tour>();
 
             //test
-            //tourCreator.addNewTour("WienTour", "Wiener Spaziergang", "Sopron", "Eisenstadt", TransportType.running);
+            tourCreator.addNewTour("Test0805", "Wiener Spaziergang", "Wien", "Gramadneusiedl", TransportType.running);
 
             LoadList();
         }

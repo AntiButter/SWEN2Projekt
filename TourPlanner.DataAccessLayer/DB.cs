@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using TourPlanner.Models;
 using TourPlanner.Models.Enum;
 
@@ -38,12 +39,20 @@ namespace TourPlanner.DataAccessLayer
             }
             catch (System.Net.Sockets.SocketException ex)
             {
+                MessageBox.Show("FEHLER: "+ex.Message+"\n\n" +
+                    "Bitte überprüfen Sie ob es Probleme mit der Datenbank, oder Fehler im config file gibt");
+
                 //log error in future
+
                 Environment.Exit(0);
             }
             catch (Npgsql.PostgresException ex)
             {
+                MessageBox.Show("FEHLER: " + ex.Message + "\n\n" +
+                    "Bitte überprüfen Sie ob es Probleme mit der Datenbank, oder Fehler im config file gibt");
+
                 //log error in future
+
                 Environment.Exit(0);
             }   
         }
