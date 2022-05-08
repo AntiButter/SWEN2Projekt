@@ -1,0 +1,4 @@
+Host=localhost
+Username=postgres
+Password=tour
+Database=postgres

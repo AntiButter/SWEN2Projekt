@@ -24,14 +24,28 @@ namespace TourPlanner.DataAccessLayer
 
         private DB()
         {
-            //get the databaseConfig string from the config file in the future
-            databaseConfig = "Host=localhost;Username=postgres;Password=tour;Database=postgres";
+            //databaseConfig = "Host=localhost;Username=postgres;Password=tour;Database=postgres";
+            databaseConfig = ConfigAccess.getDatabaseString();
             Connection = new NpgsqlConnection(databaseConfig);
+            
         }
 
         private static void Connect()
         {
-            Connection.Open();
+            try
+            {
+                Connection.Open();
+            }
+            catch (System.Net.Sockets.SocketException ex)
+            {
+                //log error in future
+                Environment.Exit(0);
+            }
+            catch (Npgsql.PostgresException ex)
+            {
+                //log error in future
+                Environment.Exit(0);
+            }   
         }
 
         private static void Disconnect()
@@ -40,17 +54,6 @@ namespace TourPlanner.DataAccessLayer
         }
 
         //functions for the program
-        public List<Tour> getToursStatic()
-        {
-
-            return new List<Tour>()
-            {
-                new Tour("TestTour0", "Beschreibung", "Wien1", "Salzburg1", TransportType.running),
-                new Tour("TestTour2", "Beschreibung", "Wien2", "Salzburg2", TransportType.running),
-                new Tour("TestTour3", "Beschreibung", "Wien3", "Salzburg3", TransportType.running)
-            };
-        }
-
         public List<Tour> getTours()
         {
             Connect();

@@ -16,6 +16,10 @@ namespace TourPlanner.BusinessLayer
         {
             IEnumerable<Tour> items = GetItems();
 
+          
+            if(items == null)
+                return items;
+            
             return items.Where(x => x.Name.ToLower().Contains(itemName.ToLower()));
         }
 

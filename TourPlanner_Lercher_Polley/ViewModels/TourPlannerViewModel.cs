@@ -170,9 +170,12 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private void LoadList()
         {
             allTours = tourGetter.GetItems();
-            foreach (Tour item in allTours)
+            if(allTours != null)
             {
-                Items.Add(item);
+                foreach (Tour item in allTours)
+                {
+                    Items.Add(item);
+                }
             }
         }
 
@@ -180,9 +183,12 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             IEnumerable foundItems = tourGetter.Search(SearchName);
             Items.Clear();
-            foreach (Tour item in foundItems)
+            if (allTours != null)
             {
-                Items.Add(item);
+                foreach (Tour item in foundItems)
+                {
+                    Items.Add(item);
+                }
             }
         }
 
