@@ -7,7 +7,7 @@ using TourPlanner.Models.Enum;
 
 namespace TourPlanner.DataAccessLayer
 {
-     class DB
+    class DB
     {
         //steup
         private string databaseConfig;
@@ -28,7 +28,7 @@ namespace TourPlanner.DataAccessLayer
             //databaseConfig = "Host=localhost;Username=postgres;Password=tour;Database=postgres";
             databaseConfig = ConfigAccess.getDatabaseString();
             Connection = new NpgsqlConnection(databaseConfig);
-            
+
         }
 
         private static void Connect()
@@ -39,7 +39,7 @@ namespace TourPlanner.DataAccessLayer
             }
             catch (System.Net.Sockets.SocketException ex)
             {
-                MessageBox.Show("FEHLER: "+ex.Message+"\n\n" +
+                MessageBox.Show("FEHLER: " + ex.Message + "\n\n" +
                     "Bitte überprüfen Sie ob es Probleme mit der Datenbank, oder Fehler im config file gibt");
 
                 //log error in future
@@ -54,7 +54,7 @@ namespace TourPlanner.DataAccessLayer
                 //log error in future
 
                 Environment.Exit(0);
-            }   
+            }
         }
 
         private static void Disconnect()
@@ -78,7 +78,7 @@ namespace TourPlanner.DataAccessLayer
                     while (reader.Read())
                     {
                         string? description = UtilityFunctions.checkNull(reader["description"].ToString());
-                        
+
 
 
                         tourList.Add(new Tour((int)reader["tourid"], (string)reader["name"], description, (string)reader["fromDB"], (string)reader["toDB"], (TransportType)Enum.Parse(typeof(TransportType), reader["transportType"].ToString()), (double)reader["distance"], (string)reader["time"]));
@@ -104,7 +104,7 @@ namespace TourPlanner.DataAccessLayer
                 return nextVal;
             }
         }
-        
+
         public void addTourToDB(Tour tour)
         {
             Connect();
@@ -122,22 +122,95 @@ namespace TourPlanner.DataAccessLayer
             }
             Disconnect();
         }
-        
 
-        /*
-        public void addTourToDB(Tour tour)
+        public List<TourLogs> getTourLogs(int TourID)
         {
             Connect();
-            using (var sql = new NpgsqlCommand("INSERT INTO tour (name, fromdb, todb, transporttype) VALUES (@_name,  @_from, @_to, @_type)", Connection))
+            using (var sql = new NpgsqlCommand("SELECT * FROM tourlogs WHERE touridfk = @tourid ORDER BY logid ASC", Connection))
             {
-                sql.Parameters.AddWithValue("_name", "fuck");
-                sql.Parameters.AddWithValue("_from", "the");
-                sql.Parameters.AddWithValue("_to", "fuckers");
-                sql.Parameters.AddWithValue("_type", "fuckers");
+                sql.Parameters.AddWithValue("tourid", TourID);
+                NpgsqlDataReader reader = sql.ExecuteReader();
+
+                List<TourLogs> tourLogList = null;
+
+                if (reader.HasRows)
+                {
+                    tourLogList = new List<TourLogs>();
+                    while (reader.Read())
+                    {
+                        string? comment = UtilityFunctions.checkNull(reader["comment"].ToString());
+
+
+
+                        tourLogList.Add(new TourLogs((DateTime)reader["logtime"], comment, (int)reader["difficulty"], (int)reader["totaltime"], (int)reader["rating"], (int)reader["logid"], (int)reader["touridfk"]));
+                    }
+                }
+
+                Disconnect();
+                return tourLogList;
+            }
+        }
+        public List<TourLogs> getAllTourLogs()
+        {
+            Connect();
+            using (var sql = new NpgsqlCommand("SELECT * FROM tourlogs ORDER BY logid ASC", Connection))
+            {
+                NpgsqlDataReader reader = sql.ExecuteReader();
+
+                List<TourLogs> tourLogList = null;
+
+                if (reader.HasRows)
+                {
+                    tourLogList = new List<TourLogs>();
+                    while (reader.Read())
+                    {
+                        string? comment = UtilityFunctions.checkNull(reader["comment"].ToString());
+
+
+
+                        tourLogList.Add(new TourLogs((DateTime)reader["logtime"], comment, (int)reader["difficulty"], (int)reader["totaltime"], (int)reader["rating"], (int)reader["logid"], (int)reader["touridfk"]));
+                    }
+                }
+
+                Disconnect();
+                return tourLogList;
+            }
+        }
+        public void addLogToDB(TourLogs log)
+        {
+            Connect();
+            using (var sql = new NpgsqlCommand("INSERT INTO tourlogs (logtime, comment, difficulty, totaltime, rating, touridk) VALUES (@ltime, @com, @diff, @ttime, @rat, @idfk)", Connection))
+            {
+                sql.Parameters.AddWithValue("ltime", log.LogTime);
+                sql.Parameters.AddWithValue("com", log.Comment);
+                sql.Parameters.AddWithValue("diff", log.Difficulty);
+                sql.Parameters.AddWithValue("ttime", log.TotalTime);
+                sql.Parameters.AddWithValue("rat", log.Rating);
+                sql.Parameters.AddWithValue("idfk", log.TourID);
                 sql.ExecuteNonQuery();
             }
             Disconnect();
         }
-        */
+
+        public void deleteTour(int tourid)
+        {
+            Connect();
+            using (var sql = new NpgsqlCommand("DELETE FROM tour WHERE tourid = @tID", Connection))
+            {
+                sql.Parameters.AddWithValue("tID", tourid);
+                sql.ExecuteNonQuery();
+            }
+            Disconnect();
+        }        
+        public void deleteTourLog(int logid)
+        {
+            Connect();
+            using (var sql = new NpgsqlCommand("DELETE FROM tourlogs WHERE logid = @lID", Connection))
+            {
+                sql.Parameters.AddWithValue("lID", logid);
+                sql.ExecuteNonQuery();
+            }
+            Disconnect();
+        }
     }
 }

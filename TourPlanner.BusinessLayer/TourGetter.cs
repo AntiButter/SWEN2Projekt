@@ -20,6 +20,8 @@ namespace TourPlanner.BusinessLayer
             if(items == null)
                 return items;
             
+            //call getAllLogs and compare it too 
+
             return items.Where(x => x.Name.ToLower().Contains(itemName.ToLower()));
         }
 
