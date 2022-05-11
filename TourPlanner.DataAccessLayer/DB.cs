@@ -86,6 +86,12 @@ namespace TourPlanner.DataAccessLayer
                 }
 
                 Disconnect();
+
+                foreach(Tour tour in tourList)
+                {
+                    tour.setLogs(getTourLogs((int)tour.ID));
+                }
+
                 return tourList;
             }
         }
@@ -131,18 +137,18 @@ namespace TourPlanner.DataAccessLayer
                 sql.Parameters.AddWithValue("tourid", TourID);
                 NpgsqlDataReader reader = sql.ExecuteReader();
 
-                List<TourLogs> tourLogList = null;
+                List<TourLogs> tourLogList = new List<TourLogs>();
 
                 if (reader.HasRows)
                 {
-                    tourLogList = new List<TourLogs>();
+                    //tourLogList = new List<TourLogs>();
                     while (reader.Read())
                     {
                         string? comment = UtilityFunctions.checkNull(reader["comment"].ToString());
 
 
 
-                        tourLogList.Add(new TourLogs((DateTime)reader["logtime"], comment, (int)reader["difficulty"], (int)reader["totaltime"], (int)reader["rating"], (int)reader["logid"], (int)reader["touridfk"]));
+                        tourLogList.Add(new TourLogs(reader["logtime"].ToString(), comment, (int)reader["difficulty"], (int)reader["totaltime"], (int)reader["rating"], (int)reader["logid"], (int)reader["touridfk"]));
                     }
                 }
 
@@ -168,7 +174,7 @@ namespace TourPlanner.DataAccessLayer
 
 
 
-                        tourLogList.Add(new TourLogs((DateTime)reader["logtime"], comment, (int)reader["difficulty"], (int)reader["totaltime"], (int)reader["rating"], (int)reader["logid"], (int)reader["touridfk"]));
+                        tourLogList.Add(new TourLogs(reader["logtime"].ToString(), comment, (int)reader["difficulty"], (int)reader["totaltime"], (int)reader["rating"], (int)reader["logid"], (int)reader["touridfk"]));
                     }
                 }
 

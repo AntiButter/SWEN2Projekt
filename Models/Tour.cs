@@ -10,16 +10,19 @@ namespace TourPlanner.Models
     public class Tour
     {
 
-        public string Name { get; set; }
-        public string? Description { get; set; }
-        public string From { get; set; }
-        public string To { get; set; }
-        public TransportType TransportType { get; set; } 
+        public string Name { get; }
+        public string? Description { get; }
+        public string From { get; }
+        public string To { get; }
+        public TransportType TransportType { get; } 
         public double? TourDistance { get; set; } //saved as kilometer //from MapQuestAPI
         public string? EstimatedTime { get; set; } //saved as string // from MapQuestAPI
         public int? Popularity { get; set; } // 1 - 5   //calculated afterwards
         public int? ChildFriendliness { get; set; } // 1 - 5   //calculated afterwards
         public int? ID { get; set; } //from Database
+        public List<TourLogs> Logs { get; set; }
+
+
 
         //create without data from MapQuestAPI (will be added later)
         public Tour(string name, string? description, string from, string to, TransportType transportType)
@@ -64,6 +67,10 @@ namespace TourPlanner.Models
         public void setChildFriendliness()
         {
             throw new NotImplementedException();
+        }        
+        public void setLogs(List<TourLogs> logs)
+        {
+            Logs = logs;
         }
 
     }
