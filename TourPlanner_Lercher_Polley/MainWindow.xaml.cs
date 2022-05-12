@@ -26,5 +26,10 @@ namespace TourPlanner_Lercher_Polley
             InitializeComponent();
             this.DataContext = new TourPlannerViewModel();
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

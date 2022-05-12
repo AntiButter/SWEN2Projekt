@@ -25,7 +25,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private TourGetter tourGetter;
         private TourCreator tourCreator;
 
-        private Tour currentItem;
+        private Tour? currentItem;
         private ICommand searchCommand;
         private ICommand clearListCommand;
         private string searchName;
@@ -112,13 +112,17 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             Items = new ObservableCollection<Tour>();
 
             //test
-            tourCreator.addNewTour("Test0805", "Wiener Spaziergang", "Wien", "Gramadneusiedl", TransportType.running);
+            //tourCreator.addNewTour("Test0805", "Wiener Spaziergang", "Wien", "Gramadneusiedl", TransportType.running);
 
             LoadList();
+
+            //Select first Tour as base
+            //CurrentItem = Items.First();
         }
 
         private void UpdateTourDetails()
         {
+            
             tourName = currentItem.Name;
             tourDescription = currentItem.Description;
             tourType = currentItem.TransportType.ToString();
@@ -129,7 +133,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             //tourPicture.UriSource = resourceUri;
             //tourPicture = "..\\..\\..\\..\\Pictures\\TourID38.png";
             //tourPicture = "pack://TourPlanner_Lercher_Polley:,,,,/Pictures/TourID38.png";
-
+            
             //tourPicture = new Bitmap("../../../../Pictures/TourID" + currentItem.ID + ".png");   
 
             //var tourPicture = new Bitmap(Image.FromFile("../../../../Pictures/TourID" + currentItem.ID + ".png"));
@@ -139,6 +143,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
             tourPicture = Path.GetFullPath("../../../../Pictures/TourID" + currentItem.ID + ".png");
 
+            
             RaisePropertyChangedEvent(nameof(TourName));
             RaisePropertyChangedEvent(nameof(TourTime));
             RaisePropertyChangedEvent(nameof(TourTo));
@@ -146,10 +151,11 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             RaisePropertyChangedEvent(nameof(TourFrom));
             RaisePropertyChangedEvent(nameof(TourDescription));
             RaisePropertyChangedEvent(nameof(TourPicture));
-
+            
             //tourPicture = null;
             //RaisePropertyChangedEvent(nameof(TourPicture));
         }        
+        /*
         private void ClearTourDetails()
         {
             tourName = "";
@@ -167,6 +173,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             RaisePropertyChangedEvent(nameof(TourDescription));
             RaisePropertyChangedEvent(nameof(TourPicture));
         }
+        */
         private void LoadList()
         {
             allTours = tourGetter.GetItems();
@@ -195,10 +202,14 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private void ClearList(object commandParameter)
         {
             Items.Clear();
+
             SearchName = "";
             LoadList();
 
-            ClearTourDetails();
+            //ClearTourDetails();
+
+            currentItem = null;
+            RaisePropertyChangedEvent(nameof(CurrentItem));
         }
 
     }
