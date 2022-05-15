@@ -78,10 +78,7 @@ namespace TourPlanner.DataAccessLayer
 
             Image tourImage = (Image)new ImageConverter().ConvertFrom(client.GetByteArrayAsync(staticURL).Result);
 
-            string path = "../../../../Pictures/TourID"+currentTour.ID+".png";
-
-            tourImage.Save(path);
-
+            PictureManager.savePicture(tourImage, (int)currentTour.ID);
 
             return pageContent;
         }

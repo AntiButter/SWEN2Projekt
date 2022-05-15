@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,11 @@ namespace TourPlanner.BusinessLayer
             return tourDataAccess.GetItems();
         }
 
-        //public 
+        public string getPicture(int ID)
+        {
+            string pictureString = Path.GetFullPath("../../../../Pictures/TourID" + ID + ".png");
+
+            return pictureString;
+        }
     }
 }

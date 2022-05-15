@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer
 {
@@ -14,12 +15,11 @@ namespace TourPlanner.DataAccessLayer
             dataAccess = DB.getInstance();
         }
 
-        /*
-        public List<Tour> GetItems()
+        
+        public List<TourLogs> GetAllTourLogs()
         {
-            //return dataAccess.getToursStatic();
-            return dataAccess.getTours();
+            return dataAccess.getAllTourLogs();
         }
-        */
+        
     }
 }

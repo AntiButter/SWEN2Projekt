@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using TourPlanner.Models;
 using TourPlanner.Models.Enum;
+using Microsoft.Extensions.Configuration;
 
 namespace TourPlanner.DataAccessLayer
 {
@@ -13,6 +14,8 @@ namespace TourPlanner.DataAccessLayer
         private string databaseConfig;
         private static NpgsqlConnection Connection;
         private static DB instance;
+        
+        //private  IConfiguration config = new ConfigurationBuilder();
 
         public static DB getInstance()
         {
