@@ -59,6 +59,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
                     currentItem = value;
                     RaisePropertyChangedEvent(nameof(CurrentItem));
 
+                    //PDFGenerator.tourReport(value);
+
                     setPicture();
                 }
             }
@@ -81,6 +83,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
             //test
             //tourCreator.addNewTour("Test0805", "Wiener Spaziergang", "Eisenstadt", "Gramadneusiedl", TransportType.running);
+            
 
             LoadList();
         }
