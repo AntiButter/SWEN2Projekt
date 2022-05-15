@@ -5,9 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner_Lercher_Polley"
         mc:Ignorable="d"
-        Title="AddTourWindow" Height="500" Width="450">
+        Title="AddTourWindow" Height="200" Width="300">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Content="Tour Name: "></Label>
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding TourName , Mode=OneWayToSource}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="1" Content="From: "></Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding TourFrom , Mode=OneWayToSource}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="2" Content="To: "></Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding TourTo , Mode=OneWayToSource}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="3" Content="Description: "></Label>
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding TourDescription , Mode=OneWayToSource}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="4" Content="Transport Type: "></Label>
+        <ComboBox Grid.Column="1" Grid.Row="4" x:Name="TransportType" Text="Select Option" SelectionChanged="selectOption_changed" SelectedValue="{Binding TransportType, Mode=TwoWay}" SelectedValuePath="Content">
+            <ComboBoxItem Content="Bike"></ComboBoxItem>
+            <ComboBoxItem Content="Hike"></ComboBoxItem>
+            <ComboBoxItem Content="Running"></ComboBoxItem>
+            <ComboBoxItem Content="Vacation"></ComboBoxItem>
+        </ComboBox>
+
         
     </Grid>
 </Window>
