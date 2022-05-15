@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner_Lercher_Polley"
         mc:Ignorable="d"
-        Title="AddTourWindow" Height="200" Width="300">
+        Title="AddTourWindow" Height="250" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -33,7 +34,6 @@
             <ComboBoxItem Content="Running"></ComboBoxItem>
             <ComboBoxItem Content="Vacation"></ComboBoxItem>
         </ComboBox>
-
-        
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Height="30" Content="Create Tour" Click="CreateTour" Background="Aquamarine" ></Button>
     </Grid>
 </Window>
