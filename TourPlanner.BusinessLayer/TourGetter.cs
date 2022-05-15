@@ -12,6 +12,7 @@ namespace TourPlanner.BusinessLayer
     public class TourGetter
     {
         private TourDataAccess tourDataAccess = new TourDataAccess();
+        private TourLogDataAccess tourLogDataAccess = new TourLogDataAccess();
 
         public IEnumerable<Tour> Search(string itemName)
         {
@@ -28,7 +29,11 @@ namespace TourPlanner.BusinessLayer
 
         public IEnumerable<Tour> GetItems()
         {
-            return tourDataAccess.GetItems();
+            var tours = tourDataAccess.GetItems();
+
+            calculateParameters(tours);
+
+            return tours;
         }
 
         public string getPicture(int ID)
@@ -36,6 +41,148 @@ namespace TourPlanner.BusinessLayer
             string pictureString = Path.GetFullPath("../../../../Pictures/TourID" + ID + ".png");
 
             return pictureString;
+        }
+
+        public void calculateParameters(IEnumerable<Tour> tours)
+        {
+            foreach (Tour tour in tours)
+            {
+                calculatePopularity(tour);
+                calculateChildFriendliness(tour);
+            }
+        }
+
+        private void calculateChildFriendliness(Tour tour)
+        {
+            //base Friendliness is 5, any negatives will abduct from that value
+            int childFriendliness = 5;
+
+            //if no logs exists, set to 1 and exit
+            if (tour.Logs.Count() == 0)
+            {
+                tour.setChildFriendliness(1); //manually set to 1 because unknown
+                return;
+            }
+
+            //difficulty
+            childFriendliness -= difficultyPenalty(tour);            
+            
+            //difficulty
+            childFriendliness -= timePenalty(tour);
+
+            //distance
+            childFriendliness -= distancePenalty(tour);
+
+            //set it to 1, if it is below
+            if(childFriendliness < 1)
+            {
+                childFriendliness = 1;
+            }
+
+            tour.setChildFriendliness(childFriendliness);
+        }
+        private int difficultyPenalty(Tour tour)
+        {
+
+            //calculate average difficulty from all logs
+            int count = tour.Logs.Count();
+            int sum = 0;
+            foreach (TourLogs log in tour.Logs)
+            {
+                sum += log.Difficulty;
+            }
+
+            //does not need to be double, because we want in trimmed
+            int averageDifficulty = sum / count;
+
+            //for every difficulty higher than 2 (so 3,4,5) we decrease the childfriendliness by 1   //if 
+            int subtractorValue = (averageDifficulty - 2);
+
+            if (subtractorValue < 0)
+                subtractorValue = 0;
+
+            return subtractorValue;
+        }
+
+        private int timePenalty(Tour tour)
+        {
+            int subtractor = 0;
+
+            //calculate average duration from all logs
+            int count = tour.Logs.Count();
+            int sum = 0;
+            foreach (TourLogs log in tour.Logs)
+            {
+                sum += log.TotalTime;
+            }
+
+            //does not need to be double, because we want in trimmed
+            int averageTime = sum / count;
+
+            //for every difficulty higher than 2 (so 3,4,5) we decrease the childfriendliness by 1   //if 
+
+            if (averageTime > 90)
+            {
+                subtractor = 1;
+            }
+            else if (averageTime > 180)
+            {
+                subtractor = 2;
+            }
+
+            return subtractor;
+        }        
+        private int distancePenalty(Tour tour)
+        {
+            int subtractorValueDistance = 0;
+
+            if (tour.TourDistance > 10)
+            {
+                subtractorValueDistance = 2;
+            }
+            else if (tour.TourDistance > 5)
+            {
+                subtractorValueDistance = 1;
+            }
+
+            return subtractorValueDistance;
+        }
+
+
+        private void calculatePopularity(Tour tour)
+        {
+            int popularity = 1;
+
+            if(tour.Logs.Count() == 0)
+            {
+                tour.setPopularity(popularity);
+                return;
+            }
+
+            //get the amount of all tour logs and compare it to the amount of logs in this tour
+            int logAmountAll = tourLogDataAccess.getTourLogAmountTotal();
+            int logAmountThisTour = tour.Logs.Count();
+
+            double percent = (logAmountThisTour / logAmountAll) * 100;
+
+            if (percent > 40)
+            {
+                popularity = 5;
+            } 
+            else if (percent > 30)
+            {
+                popularity = 4;
+            } 
+            else if (percent > 20)
+            {
+                popularity = 3;
+            } 
+            else if (percent > 10)
+            {
+                popularity = 2;
+            }
+
+            tour.setPopularity(popularity);
         }
     }
 }

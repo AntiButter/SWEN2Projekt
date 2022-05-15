@@ -7,18 +7,18 @@ using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer
 {
-    public class TourLogDataAcess
+    public class TourLogDataAccess
     {
         private DB dataAccess;
-        public TourLogDataAcess()
+        public TourLogDataAccess()
         {
             dataAccess = DB.getInstance();
         }
 
         
-        public List<TourLogs> GetAllTourLogs()
+        public int getTourLogAmountTotal()
         {
-            return dataAccess.getAllTourLogs();
+            return dataAccess.getTourLogAmountTotal();
         }
         
     }

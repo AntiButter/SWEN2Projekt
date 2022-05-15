@@ -60,13 +60,13 @@ namespace TourPlanner.Models
         {
             ID = id;
         }           
-        public void setPopularity ()
+        public void setPopularity (int popularity)
         {
-            throw new NotImplementedException();
+            Popularity = popularity;
         }        
-        public void setChildFriendliness()
+        public void setChildFriendliness(int childFriendliness)
         {
-            throw new NotImplementedException();
+            ChildFriendliness = childFriendliness;
         }        
         public void setLogs(List<TourLogs> logs)
         {

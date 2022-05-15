@@ -112,6 +112,20 @@ namespace TourPlanner.DataAccessLayer
                 Disconnect();
                 return nextVal;
             }
+        }        
+        public int getTourLogAmountTotal()
+        {
+            Connect();
+            using (var sql = new NpgsqlCommand("SELECT count(*) AS countVal FROM tourlogs", Connection))
+            {
+                NpgsqlDataReader reader = sql.ExecuteReader();
+
+                reader.Read();
+                int logAmount = (int)(long)reader["countVal"];
+
+                Disconnect();
+                return logAmount;
+            }
         }
 
         public void addTourToDB(Tour tour)
@@ -159,6 +173,7 @@ namespace TourPlanner.DataAccessLayer
                 return tourLogList;
             }
         }
+        /*
         public List<TourLogs> getAllTourLogs()
         {
             Connect();
@@ -185,6 +200,7 @@ namespace TourPlanner.DataAccessLayer
                 return tourLogList;
             }
         }
+        */
         public void addLogToDB(TourLogs log)
         {
             Connect();
