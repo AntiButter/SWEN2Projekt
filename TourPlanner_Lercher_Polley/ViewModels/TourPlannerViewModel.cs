@@ -28,11 +28,13 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private Tour? currentItem;
         private ICommand searchCommand;
         private ICommand clearListCommand;
+        private ICommand addTourCommand;
         private string searchName;
         private string tourPicture;
 
         public ICommand SearchCommand => searchCommand ??= new RelayCommand(Search);
         public ICommand ClearListCommand => clearListCommand ??= new RelayCommand(ClearList);
+        public ICommand AddTourCommand => addTourCommand ??= new RelayCommand(AddTour); 
 
         public ObservableCollection<Tour> Items { get; set; }
 
@@ -106,6 +108,12 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             }
         }
 
+        private static void AddTour(object commandParameter)
+        {
+            AddTourWindow addTourWindow = new AddTourWindow();
+            addTourWindow.Show();   
+        }
+
         private void Search(object commandParameter)
         {
             IEnumerable foundItems = tourGetter.Search(SearchName);
@@ -129,6 +137,5 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             currentItem = null;
             RaisePropertyChangedEvent(nameof(CurrentItem));
         }
-
     }
 }
