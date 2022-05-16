@@ -59,6 +59,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
                     currentItem = value;
                     RaisePropertyChangedEvent(nameof(CurrentItem));
 
+                    //test
                     //PDFGenerator.tourReport(value);
 
                     setPicture();

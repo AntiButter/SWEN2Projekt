@@ -96,7 +96,7 @@ namespace TourPlanner.BusinessLayer
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 
-            Paragraph tourInfoHeader = new Paragraph("Tour Info")
+            Paragraph tourInfoHeader = new Paragraph("Tour Info:")
                     .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                     .SetFontSize(16)
                     .SetBold();
@@ -116,27 +116,43 @@ namespace TourPlanner.BusinessLayer
                     .Add(new ListItem("Popularity: " + tour.Popularity));
             document.Add(list);
 
+            document.Add(new Paragraph("\n\n"));
 
-            //Table mit logs ?
-            /*
-            Paragraph tableHeader = new Paragraph("Lorem Ipsum Table ...")
-                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN))
-                    .SetFontSize(18)
-                    .SetBold()
-                    .SetFontColor(ColorConstants.GREEN);
-            document.Add(tableHeader);
-            Table table = new Table(UnitValue.CreatePercentArray(4)).UseAllAvailableWidth();
-            table.AddHeaderCell(getHeaderCell("Ipsum 1"));
-            table.AddHeaderCell(getHeaderCell("Ipsum 2"));
-            table.AddHeaderCell(getHeaderCell("Ipsum 3"));
-            table.AddHeaderCell(getHeaderCell("Ipsum 4"));
+            Paragraph tourLogHeader = new Paragraph("Tour Logs:")
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(16)
+                    .SetBold();
+            document.Add(tourLogHeader);
+            Table table = new Table(UnitValue.CreatePercentArray(6)).UseAllAvailableWidth();
+            table.AddHeaderCell(getHeaderCell("Log created"));
+            table.AddHeaderCell(getHeaderCell("Duration"));
+            table.AddHeaderCell(getHeaderCell("Difficulty 1-5"));
+            table.AddHeaderCell(getHeaderCell("Rating 1-5"));
+            table.AddHeaderCell(getHeaderCell("Comment"));
             table.SetFontSize(14).SetBackgroundColor(ColorConstants.WHITE);
-            table.AddCell("lorem 1");
-            table.AddCell("lorem 2");
-            table.AddCell("lorem 3");
-            table.AddCell("lorem 4");
+
+            if(tour.Logs.Count() != 0)
+            {
+                foreach(var log in tour.Logs)
+                {
+                    table.AddCell(log.LogTime);
+                    table.AddCell(log.TotalTime.ToString());
+                    table.AddCell(log.Difficulty.ToString());
+                    table.AddCell(log.Rating.ToString());
+                    if(log.Comment != null)
+                    {
+                        table.AddCell(log.Comment);
+                        table.SetFontSize(12);
+                    }
+                    else
+                    {
+                        table.AddCell("");
+                    }
+                    table.StartNewRow();
+                }
+            }
             document.Add(table);
-            */
+            
             document.Add(new AreaBreak());
 
             Paragraph imageHeader = new Paragraph("Route Image:")
@@ -144,7 +160,18 @@ namespace TourPlanner.BusinessLayer
                     .SetFontSize(16)
                     .SetBold();
             document.Add(imageHeader);
-            ImageData imageData = ImageDataFactory.Create(picture);
+
+            ImageData imageData;
+
+            try
+            {
+                imageData = ImageDataFactory.Create(picture);
+            }
+            catch (Exception ex)
+            {
+                //log
+                imageData = ImageDataFactory.Create("../../../../Pictures/filler.PNG");
+            }
             document.Add(new Image(imageData));
 
             document.Close();
