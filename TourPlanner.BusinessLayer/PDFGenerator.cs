@@ -111,7 +111,7 @@ namespace TourPlanner.BusinessLayer
                     .Add(new ListItem("Description: " + tour.Description))
                     .Add(new ListItem("Type: " + tour.TransportType))
                     .Add(new ListItem("Time: " + tour.EstimatedTime + " Hour:Minute:Seconds"))
-                    .Add(new ListItem("Distance: " + tour.TourDistance + "kilometers"))
+                    .Add(new ListItem("Distance: " + tour.TourDistance + " km"))
                     .Add(new ListItem("Child Friendliness: " + tour.ChildFriendliness))
                     .Add(new ListItem("Popularity: " + tour.Popularity));
             document.Add(list);

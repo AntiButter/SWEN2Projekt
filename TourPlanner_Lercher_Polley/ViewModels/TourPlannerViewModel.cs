@@ -86,7 +86,6 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
             //test
             //tourCreator.addNewTour("Test0805", "Wiener Spaziergang", "Eisenstadt", "Gramadneusiedl", TransportType.running);
-            
 
             LoadList();
         }
@@ -108,10 +107,12 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             }
         }
 
-        private static void AddTour(object commandParameter)
+        private void AddTour(object commandParameter)
         {
             AddTourWindow addTourWindow = new AddTourWindow();
-            addTourWindow.Show();   
+            addTourWindow.ShowDialog();
+
+            LoadList();
         }
 
         private void Search(object commandParameter)

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TourPlanner_Lercher_Polley.ViewModels;
 
 namespace TourPlanner_Lercher_Polley
 {
@@ -22,6 +23,7 @@ namespace TourPlanner_Lercher_Polley
         public AddTourWindow()
         {
             InitializeComponent();
+            this.DataContext = new AddTourViewModel();
         }
     }
 }

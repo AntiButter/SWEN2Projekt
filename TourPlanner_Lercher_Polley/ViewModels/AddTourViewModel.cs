@@ -8,6 +8,7 @@ using System.Windows.Input;
 using TourPlanner.Models.Enum;
 using TourPlanner.Models;
 using TourPlanner.BusinessLayer;
+using System.Windows;
 
 namespace TourPlanner_Lercher_Polley.ViewModels
 {
@@ -31,11 +32,14 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         private void CreateTour(object commandParameter)
         {
-            throw new Exception();
             tourCreator = new TourCreator();
             tourCreator.addNewTour(TourName, TourDescription, TourFrom, TourTo, TransportType.bike);
 
 
+            foreach (Window item in Application.Current.Windows)
+            {
+                if (item.DataContext == this) item.Close();
+            }
         }
 
 
