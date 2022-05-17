@@ -18,75 +18,61 @@ namespace TourPlanner.BusinessLayer
 {
     public static class PDFGenerator
     { 
-        /*
-        public static void test()
+        
+        public static void summarizeReport()
         {
-            const string LOREM_IPSUM_TEXT = "Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-            const string GOOGLE_MAPS_PNG = "../../../../Pictures/TourID2.png";
-            const string TARGET_PDF = "target.pdf";
+            TourGetter tourGetter = new TourGetter();
+            string pdfPath = "../../../../PDF/Summary.pdf";
 
-            PdfWriter writer = new PdfWriter(TARGET_PDF);
+            PdfWriter writer = new PdfWriter(pdfPath);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 
-            Paragraph loremIpsumHeader = new Paragraph("Lorem Ipsum header...")
+            Paragraph tourLogHeader = new Paragraph("Summary of each Tour:")
                     .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                    .SetFontSize(14)
-                    .SetBold()
-                    .SetFontColor(ColorConstants.RED);
-            document.Add(loremIpsumHeader);
-            document.Add(new Paragraph(LOREM_IPSUM_TEXT));
-
-            Paragraph listHeader = new Paragraph("Lorem Ipsum ...")
-                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD))
-                    .SetFontSize(14)
-                    .SetBold()
-                    .SetFontColor(ColorConstants.BLUE);
-            List list = new List()
-                    .SetSymbolIndent(12)
-                    .SetListSymbol("\u2022")
-                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD));
-            list.Add(new ListItem("lorem ipsum 1"))
-                    .Add(new ListItem("lorem ipsum 2"))
-                    .Add(new ListItem("lorem ipsum 3"))
-                    .Add(new ListItem("lorem ipsum 4"))
-                    .Add(new ListItem("lorem ipsum 5"))
-                    .Add(new ListItem("lorem ipsum 6"));
-            document.Add(listHeader);
-            document.Add(list);
-
-            Paragraph tableHeader = new Paragraph("Lorem Ipsum Table ...")
-                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN))
-                    .SetFontSize(18)
-                    .SetBold()
-                    .SetFontColor(ColorConstants.GREEN);
-            document.Add(tableHeader);
+                    .SetFontSize(16)
+                    .SetBold();
+            document.Add(tourLogHeader);
             Table table = new Table(UnitValue.CreatePercentArray(4)).UseAllAvailableWidth();
-            table.AddHeaderCell(getHeaderCell("Ipsum 1"));
-            table.AddHeaderCell(getHeaderCell("Ipsum 2"));
-            table.AddHeaderCell(getHeaderCell("Ipsum 3"));
-            table.AddHeaderCell(getHeaderCell("Ipsum 4"));
+            table.AddHeaderCell(getHeaderCell("Tour"));
+            table.AddHeaderCell(getHeaderCell("Average Time"));
+            table.AddHeaderCell(getHeaderCell("Average Distance"));
+            table.AddHeaderCell(getHeaderCell("Average Rating"));
             table.SetFontSize(14).SetBackgroundColor(ColorConstants.WHITE);
-            table.AddCell("lorem 1");
-            table.AddCell("lorem 2");
-            table.AddCell("lorem 3");
-            table.AddCell("lorem 4");
+
+            IEnumerable<Tour> tours = tourGetter.GetItems();
+
+            foreach (var tour in tours)
+            {
+                table.AddCell(tour.Name);
+
+                double averageTime = 0;
+                double averageDistance = (double)tour.TourDistance;
+                double averageRating = 0;
+                int logCount = 0;
+
+                foreach(var log in tour.Logs)
+                {
+                    averageTime += log.TotalTime;
+                    averageRating += log.Rating;
+                    logCount++;
+                }
+                
+                averageTime = averageTime / logCount;
+                averageRating = averageRating / logCount;
+
+                table.AddCell(averageTime.ToString());
+                table.AddCell(averageDistance.ToString());
+                table.AddCell(averageRating.ToString());
+
+                table.StartNewRow();
+            }
+            
             document.Add(table);
-
-            document.Add(new AreaBreak());
-
-            Paragraph imageHeader = new Paragraph("Lorem Ipsum Image ...")
-                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN))
-                    .SetFontSize(18)
-                    .SetBold()
-                    .SetFontColor(ColorConstants.GREEN);
-            document.Add(imageHeader);
-            ImageData imageData = ImageDataFactory.Create(GOOGLE_MAPS_PNG);
-            document.Add(new Image(imageData));
 
             document.Close();
         } 
-        */
+        
         public static void tourReport(Tour tour)
         {
             string pdfPath = "../../../../PDF/TourID"+tour.ID+".pdf";

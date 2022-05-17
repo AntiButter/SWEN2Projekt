@@ -18,12 +18,16 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Tourname:" Margin="5,0,5,0" VerticalAlignment="Center"/>
                 <TextBox Grid.Column="1" Name="search" VerticalAlignment="Center" Text="{Binding SearchName, Mode=TwoWay}"/>
                 <Button Grid.Column="2" Width="60" Margin="20,0,0,0" BorderThickness="2" Command="{Binding SearchCommand}">Search</Button>
                 <Button Grid.Column="3" Width="60" Background="Red" BorderThickness="2" Margin="15,0,0,0" Command="{Binding ClearListCommand}">Clear</Button>
                 <Button Grid.Column="4" Width="60" Background="Aquamarine" Margin="15,0,0,0" Command="{Binding AddTourCommand}" Content="AddTour"></Button>
+                <Button Grid.Column="5" Width="105" Background="Yellow" Margin="15,0,0,0" Command="{Binding CreateTourReportCommand}" Content="Create Tour Report"></Button>
+                <Button Grid.Column="6" Width="140" Background="Yellow" Margin="15,0,0,0" Command="{Binding CreateSummarizeReportCommand}" Content="Create Summarize Report"></Button>
             </Grid>
         </StackPanel>
         <ListBox x:Name="listMediaItems" ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem}" DisplayMemberPath="Name" Margin="0,60,0,0" Width="176" HorizontalAlignment="Left"/>

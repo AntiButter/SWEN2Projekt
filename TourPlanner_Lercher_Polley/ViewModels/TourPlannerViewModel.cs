@@ -16,6 +16,7 @@ using TourPlanner.Models.Enum;
 using TourPlanner_Lercher_Polley.ViewModels;
 using System.Windows.Controls;
 using System.Threading;
+using System.Windows;
 
 namespace TourPlanner_Lercher_Polley.ViewModels
 {
@@ -29,12 +30,16 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private ICommand searchCommand;
         private ICommand clearListCommand;
         private ICommand addTourCommand;
+        private ICommand createTourReportCommand;
+        private ICommand createSummarizeReportCommand;
         private string searchName;
         private string tourPicture;
 
         public ICommand SearchCommand => searchCommand ??= new RelayCommand(Search);
         public ICommand ClearListCommand => clearListCommand ??= new RelayCommand(ClearList);
         public ICommand AddTourCommand => addTourCommand ??= new RelayCommand(AddTour); 
+        public ICommand CreateTourReportCommand => createTourReportCommand ??= new RelayCommand(CreateTourReport); 
+        public ICommand CreateSummarizeReportCommand => createSummarizeReportCommand ??= new RelayCommand(CreateSummarizeReport); 
 
         public ObservableCollection<Tour> Items { get; set; }
 
@@ -60,9 +65,6 @@ namespace TourPlanner_Lercher_Polley.ViewModels
                 {
                     currentItem = value;
                     RaisePropertyChangedEvent(nameof(CurrentItem));
-
-                    //test
-                    //PDFGenerator.tourReport(value);
 
                     setPicture();
                 }
@@ -137,6 +139,27 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
             currentItem = null;
             RaisePropertyChangedEvent(nameof(CurrentItem));
+        }        
+        private void CreateTourReport(object commandParameter)
+        {
+            if(currentItem == null)
+            {
+                //log
+                //make it more MVVM friendly
+                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                return;
+            }
+
+            PDFGenerator.tourReport(currentItem);
+
+            //give feedback that the report was created
+        }        
+        private void CreateSummarizeReport(object commandParameter)
+        {
+
+            PDFGenerator.summarizeReport();
+
+            //give feedback that the report was created
         }
     }
 }
