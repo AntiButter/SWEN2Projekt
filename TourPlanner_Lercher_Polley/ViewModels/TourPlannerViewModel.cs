@@ -114,6 +114,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             AddTourWindow addTourWindow = new AddTourWindow();
             addTourWindow.ShowDialog();
 
+            Items.Clear();
             LoadList();
         }
 

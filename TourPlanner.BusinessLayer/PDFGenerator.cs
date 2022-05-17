@@ -61,8 +61,8 @@ namespace TourPlanner.BusinessLayer
                 averageTime = averageTime / logCount;
                 averageRating = averageRating / logCount;
 
-                table.AddCell(averageTime.ToString());
-                table.AddCell(averageDistance.ToString());
+                table.AddCell(averageTime.ToString()+" minutes");
+                table.AddCell(averageDistance.ToString()+ " km");
                 table.AddCell(averageRating.ToString());
 
                 table.StartNewRow();
