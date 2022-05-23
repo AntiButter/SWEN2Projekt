@@ -17,14 +17,13 @@ namespace TourPlanner.BusinessLayer
         public IEnumerable<Tour> Search(string itemName)
         {
             IEnumerable<Tour> items = GetItems();
-
           
             if(items == null)
                 return items;
             
             //call getAllLogs and compare it too 
 
-            return items.Where(x => x.Name.ToLower().Contains(itemName.ToLower()));
+            return items.Where(x => x.Name.ToLower().Contains(itemName.ToLower()));            
         }
 
         public IEnumerable<Tour> GetItems()
@@ -121,13 +120,13 @@ namespace TourPlanner.BusinessLayer
 
             //for every difficulty higher than 2 (so 3,4,5) we decrease the childfriendliness by 1   //if 
 
-            if (averageTime > 90)
-            {
-                subtractor = 1;
-            }
-            else if (averageTime > 180)
+            if (averageTime > 180)
             {
                 subtractor = 2;
+            }
+            else if (averageTime > 90)
+            {
+                subtractor = 1;
             }
 
             return subtractor;
