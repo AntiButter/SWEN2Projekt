@@ -20,6 +20,10 @@ namespace TourPlanner.DataAccessLayer
         {
             return dataAccess.getTourLogAmountTotal();
         }
-        
+
+        public void addLogToDB(object newTour)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

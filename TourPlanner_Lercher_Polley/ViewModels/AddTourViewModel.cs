@@ -19,7 +19,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public string TourFrom { get; set; }
         public string TourDescription { get; set; }
         public TransportType TransportType { get; set; }
-        private TourCreator tourCreator;
+        private TourManager tourManager;
         private ICommand createTourCommand;
 
         public ICommand CreateTourCommand => createTourCommand ??= new RelayCommand(CreateTour); 
@@ -32,8 +32,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         private void CreateTour(object commandParameter)
         {
-            tourCreator = new TourCreator();
-            tourCreator.addNewTour(TourName, TourDescription, TourFrom, TourTo, TransportType.bike);
+            tourManager = new TourManager();
+            tourManager.addNewTour(TourName, TourDescription, TourFrom, TourTo, TransportType.bike);
 
 
             foreach (Window item in Application.Current.Windows)

@@ -25,6 +25,15 @@ namespace TourPlanner.Models
             Rating = rating;
             LogID = id;
             this.TourID = TourID;
+        }        
+        //für create
+        public TourLogs(string? comment, int difficulty, int totalTime, int rating, int TourID)
+        {
+            Comment = comment;
+            Difficulty = difficulty;
+            TotalTime = totalTime;
+            Rating = rating;
+            this.TourID = TourID;
         }
     }
 }

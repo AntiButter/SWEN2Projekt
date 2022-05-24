@@ -9,7 +9,7 @@ using TourPlanner.Models.Enum;
 
 namespace TourPlanner.BusinessLayer
 {
-    public class TourCreator
+    public class TourManager
     {
         private TourDataAccess tourDataAccess = new TourDataAccess();
 

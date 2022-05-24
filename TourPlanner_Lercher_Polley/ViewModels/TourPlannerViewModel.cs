@@ -24,7 +24,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
     {
         private IEnumerable<Tour> allTours;
         private TourGetter tourGetter;
-        private TourCreator tourCreator;
+        private TourManager tourManager;
 
         private Tour? currentItem;
         private ICommand searchCommand;
@@ -83,7 +83,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public TourPlannerViewModel()
         {
             tourGetter = new TourGetter();
-            tourCreator = new TourCreator();
+            tourManager = new TourManager();
             Items = new ObservableCollection<Tour>();
 
             //test
