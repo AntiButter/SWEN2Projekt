@@ -36,5 +36,21 @@ namespace TourPlanner.BusinessLayer
         {
             tourDataAccess.addTourToDB(tour);   
         }
+
+        public void deleteTour(Tour tour)
+        {
+            tourDataAccess.deleteTour((int)tour.ID);
+        }        
+     
+        public void changeTour(Tour oldTour, string name, string? description, string from, string to, TransportType transportType)
+        {
+            Tour changedTour = new Tour(name, description, from, to, transportType);
+
+            changedTour.setID((int)oldTour.ID);
+
+            mapQuestAPIRequest(changedTour);
+
+            tourDataAccess.changeTour(changedTour);
+        }
     }
 }

@@ -18,5 +18,17 @@ namespace TourPlanner.BusinessLayer
 
             tourLogDataAccess.addLogToDB(newLog);
         }
+
+        public void deleteLog(TourLogs log)
+        {
+            tourLogDataAccess.deleteLog((int)log.LogID);
+        }
+
+        public void changeLog(TourLogs log, string? comment, int difficulty, int totalTime, int rating, int TourID)
+        {
+            TourLogs newLog = new(comment, difficulty, totalTime, rating, TourID);
+
+            tourLogDataAccess.changeLog((int)log.LogID, newLog);
+        }
     }
 }

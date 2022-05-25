@@ -25,6 +25,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private IEnumerable<Tour> allTours;
         private TourGetter tourGetter;
         private TourManager tourManager;
+        private LogManager logManager;
 
         private Tour? currentItem;
         private ICommand searchCommand;
@@ -88,6 +89,16 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
             //test
             //tourCreator.addNewTour("Test0805", "Wiener Spaziergang", "Eisenstadt", "Gramadneusiedl", TransportType.running);
+
+            //Tour testTour = new Tour("aaa", "Wiener asd", "Eisenstadt", "Gramadneusiedl", TransportType.running);
+            //testTour.setID(99);
+            //tourManager.changeTour(testTour, "Test0805", "Wiener Spaziergang", "Eisenstadt", "Gramadneusiedl", TransportType.running);
+
+            //logManager = new LogManager();
+            //logManager.addNewLog("", 5, 100, 5, 28);
+            //TourPlanner.Models.TourLogs testLog = new TourPlanner.Models.TourLogs("", 5, 100, 5, 28);
+            //testLog.setID(8);
+            //logManager.changeLog(testLog, "change test", 3, 100, 5, 28);
 
             LoadList();
         }

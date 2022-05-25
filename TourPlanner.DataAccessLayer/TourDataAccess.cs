@@ -17,7 +17,6 @@ namespace TourPlanner.DataAccessLayer
         
         public List<Tour> GetItems()
         {
-            //return dataAccess.getToursStatic();
             return dataAccess.getTours();
         }
 
@@ -31,6 +30,14 @@ namespace TourPlanner.DataAccessLayer
             dataAccess.addTourToDB(tour);
         }
 
+        public void deleteTour(int ID)
+        {
+            dataAccess.deleteTour(ID);
+        }
 
+        public void changeTour(Tour changedTour)
+        {
+            dataAccess.changeTourDB(changedTour);
+        }
     }
 }

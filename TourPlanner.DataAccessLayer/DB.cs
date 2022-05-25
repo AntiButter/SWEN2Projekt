@@ -144,6 +144,20 @@ namespace TourPlanner.DataAccessLayer
                 sql.ExecuteNonQuery();
             }
             Disconnect();
+        }        
+        public void addLogToDB(TourLogs log)
+        {
+            Connect();
+            using (var sql = new NpgsqlCommand("INSERT INTO tourlogs (comment, difficulty, totaltime, rating, touridfk) VALUES (@comment, @difficulty, @totaltime, @rating, @touridfk)", Connection))
+            {
+                sql.Parameters.AddWithValue("comment", log.Comment);
+                sql.Parameters.AddWithValue("difficulty", log.Difficulty);
+                sql.Parameters.AddWithValue("totaltime", log.TotalTime);
+                sql.Parameters.AddWithValue("rating", log.Rating);
+                sql.Parameters.AddWithValue("touridfk", log.TourID);
+                sql.ExecuteNonQuery();
+            }
+            Disconnect();
         }
 
         public List<TourLogs> getTourLogs(int TourID)
@@ -201,21 +215,6 @@ namespace TourPlanner.DataAccessLayer
             }
         }
         */
-        public void addLogToDB(TourLogs log)
-        {
-            Connect();
-            using (var sql = new NpgsqlCommand("INSERT INTO tourlogs (logtime, comment, difficulty, totaltime, rating, touridk) VALUES (@ltime, @com, @diff, @ttime, @rat, @idfk)", Connection))
-            {
-                sql.Parameters.AddWithValue("ltime", log.LogTime);
-                sql.Parameters.AddWithValue("com", log.Comment);
-                sql.Parameters.AddWithValue("diff", log.Difficulty);
-                sql.Parameters.AddWithValue("ttime", log.TotalTime);
-                sql.Parameters.AddWithValue("rat", log.Rating);
-                sql.Parameters.AddWithValue("idfk", log.TourID);
-                sql.ExecuteNonQuery();
-            }
-            Disconnect();
-        }
 
         public void deleteTour(int tourid)
         {
@@ -233,6 +232,39 @@ namespace TourPlanner.DataAccessLayer
             using (var sql = new NpgsqlCommand("DELETE FROM tourlogs WHERE logid = @lID", Connection))
             {
                 sql.Parameters.AddWithValue("lID", logid);
+                sql.ExecuteNonQuery();
+            }
+            Disconnect();
+        }
+
+        public void changeTourDB(Tour tour)
+        {
+            Connect();
+            using (var sql = new NpgsqlCommand("UPDATE tour SET name = @name, description = @description, fromdb = @from, todb = @to, transporttype = @transportType, distance = @distance, time = @time WHERE tourid = @id", Connection))
+            {
+                sql.Parameters.AddWithValue("name", tour.Name);
+                sql.Parameters.AddWithValue("description", tour.Description);
+                sql.Parameters.AddWithValue("from", tour.From);
+                sql.Parameters.AddWithValue("to", tour.To);
+                sql.Parameters.AddWithValue("transportType", tour.TransportType.ToString());
+                sql.Parameters.AddWithValue("distance", tour.TourDistance);
+                sql.Parameters.AddWithValue("time", tour.EstimatedTime);
+                sql.Parameters.AddWithValue("id", tour.ID);
+                sql.ExecuteNonQuery();
+            }
+            Disconnect();
+        }
+
+        public void changeLogDB(int oldLogID, TourLogs log)
+        {
+            Connect();
+            using (var sql = new NpgsqlCommand("UPDATE tourlogs SET comment = @comment, difficulty = @difficulty, totaltime = @totaltime, rating = @rating WHERE logid = @id", Connection))
+            {
+                sql.Parameters.AddWithValue("comment", log.Comment);
+                sql.Parameters.AddWithValue("difficulty", log.Difficulty);
+                sql.Parameters.AddWithValue("totaltime", log.TotalTime);
+                sql.Parameters.AddWithValue("rating", log.Rating);
+                sql.Parameters.AddWithValue("id", oldLogID);
                 sql.ExecuteNonQuery();
             }
             Disconnect();

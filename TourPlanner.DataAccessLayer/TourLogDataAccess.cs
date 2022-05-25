@@ -21,9 +21,19 @@ namespace TourPlanner.DataAccessLayer
             return dataAccess.getTourLogAmountTotal();
         }
 
-        public void addLogToDB(object newTour)
+        public void addLogToDB(TourLogs newTour)
         {
-            throw new NotImplementedException();
+            dataAccess.addLogToDB(newTour);
+        }
+
+        public void deleteLog(int logID)
+        {
+            dataAccess.deleteTourLog(logID);
+        }
+
+        public void changeLog(int logID, TourLogs newLog)
+        {
+            dataAccess.changeLogDB(logID, newLog);
         }
     }
 }

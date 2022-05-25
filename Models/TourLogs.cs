@@ -35,5 +35,10 @@ namespace TourPlanner.Models
             Rating = rating;
             this.TourID = TourID;
         }
+        //only for Testing!
+        public void setID(int id)
+        {
+            LogID = id;
+        }
     }
 }
