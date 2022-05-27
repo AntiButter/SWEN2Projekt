@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner_Lercher_Polley"
+        xmlns:viewModels="clr-namespace:TourPlanner_Lercher_Polley.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewModels:TourLogsViewModel}"
         mc:Ignorable="d"
         Title="TourLogs" Height="200" Width="200">
     <Grid>
@@ -22,12 +24,12 @@
         <Label Grid.Row="0" Grid.Column="0" Content="Difficulty: "/>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding LogDifficulty}" />
         <Label Grid.Row="1" Grid.Column="0" Content="Time: "/>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding LogTime}" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding LogTime}" />
         <Label Grid.Row="2" Grid.Column="0" Content="Rating: "/>     
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding LogRating}" />
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding LogRating}" />
         <Label Grid.Row="3" Grid.Column="0" Content="Comment: "/>
         <TextBox Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Text="{Binding LogComment}" />
-        <Button Grid.Column="0" Grid.Row="5" Command="{Binding SubmitLog}" Content="Submit" Background="Green"/>
+        <Button Grid.Column="0" Grid.Row="5" Command="{Binding LogCommand}" Content="Submit" Background="Green"/>
         <Button Grid.Column="1" Grid.Row="5" Command="{Binding Cancel}" Content="Cancel" Background="Red"/>
     </Grid>
 </Window>
