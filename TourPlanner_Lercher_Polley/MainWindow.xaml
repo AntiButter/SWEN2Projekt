@@ -92,7 +92,7 @@
                           Binding="{Binding Comment}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="AddTour" Background="Aquamarine" Grid.ColumnSpan="2" Margin="10,181,613,-49" Grid.Row="5" Command="{Binding AddTourLogCommand}" ></Button>
+            <Button Content="Add Log" Background="Aquamarine" Grid.ColumnSpan="2" Margin="10,181,613,-49" Grid.Row="5" Command="{Binding AddTourLogCommand}" ></Button>
         </Grid>
     </Grid>
 </Window>
