@@ -36,7 +36,6 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             {
                 AddLog();
             }
-
             else
             {
                 EditLog();
