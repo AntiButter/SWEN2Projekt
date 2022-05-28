@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
- using System.Windows.Input;
+using System.Windows;
+using System.Windows.Input;
  using TourPlanner.BusinessLayer;
  using TourPlanner.DataAccessLayer;
  using TourPlanner.Models;
@@ -45,6 +46,11 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public void AddLog()
         {
             logManager.addNewLog(LogComment, LogDifficulty, LogTime, LogRating, TourID);
+
+            foreach (Window item in Application.Current.Windows)
+            {
+                if (item.DataContext == this) item.Close();
+            }
         }
 
 

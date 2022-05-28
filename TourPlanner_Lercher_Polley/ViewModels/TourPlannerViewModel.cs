@@ -133,8 +133,19 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         }
         public void addTourLog(object commandParameter)
         {
+            if (currentItem == null)
+            {
+                //log
+                //make it more MVVM friendly
+                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                return;
+            }
+
             TourLogs tourLogs = new TourLogs(true,(int)CurrentItem.ID);
             tourLogs.ShowDialog();
+
+            Items.Clear();
+            LoadList();
         }
 
         private void Search(object commandParameter)
