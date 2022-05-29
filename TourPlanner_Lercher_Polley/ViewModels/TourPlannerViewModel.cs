@@ -34,6 +34,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private ICommand createTourReportCommand;
         private ICommand createSummarizeReportCommand;
         private ICommand addTourLogCommand;
+        private ICommand deleteTourLogCommand;
+        private ICommand editTourLogCommand;
         private string searchName;
         private string tourPicture;
 
@@ -43,6 +45,10 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public ICommand CreateTourReportCommand => createTourReportCommand ??= new RelayCommand(CreateTourReport); 
         public ICommand CreateSummarizeReportCommand => createSummarizeReportCommand ??= new RelayCommand(CreateSummarizeReport);
         public ICommand AddTourLogCommand => addTourLogCommand ??= new RelayCommand(addTourLog);
+        public ICommand DeleteTourLogCommand => deleteTourLogCommand ??= new RelayCommand(deleteTourLog);
+        public ICommand EditTourLogCommand => editTourLogCommand ??= new RelayCommand(editTourLog);
+
+
 
         public ObservableCollection<Tour> Items { get; set; }
 
@@ -148,6 +154,15 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             LoadList();
         }
 
+        public void deleteTourLog(object commandParameter)
+        {
+
+        }
+
+        public void editTourLog(object commandParameter)
+        {
+
+        }
         private void Search(object commandParameter)
         {
             IEnumerable foundItems = tourGetter.Search(SearchName);

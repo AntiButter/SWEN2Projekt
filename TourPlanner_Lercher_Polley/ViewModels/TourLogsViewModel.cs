@@ -28,6 +28,10 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             logManager = new LogManager();
             EditOrAdd = chooserEditOrAdd;
             TourID = ID;
+            if (!chooserEditOrAdd)
+            {
+
+            }
         }
 
         

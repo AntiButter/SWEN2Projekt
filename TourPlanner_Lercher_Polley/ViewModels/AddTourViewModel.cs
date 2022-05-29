@@ -33,7 +33,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private void CreateTour(object commandParameter)
         {
             tourManager = new TourManager();
-            tourManager.addNewTour(TourName, TourDescription, TourFrom, TourTo, TransportType.bike);
+            tourManager.addNewTour(TourName, TourDescription, TourFrom, TourTo, TransportType);
 
 
             foreach (Window item in Application.Current.Windows)
