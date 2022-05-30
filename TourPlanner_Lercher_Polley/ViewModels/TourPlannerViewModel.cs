@@ -26,6 +26,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private TourGetter tourGetter;
         private TourManager tourManager;
         private LogManager logManager;
+        private ImportExport importExport;
 
         private Tour? currentItem;
         private ICommand searchCommand;
@@ -108,6 +109,10 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             //TourPlanner.Models.TourLogs testLog = new TourPlanner.Models.TourLogs("", 5, 100, 5, 28);
             //testLog.setID(8);
             //logManager.changeLog(testLog, "change test", 3, 100, 5, 28);
+
+
+            //importExport = new ImportExport();
+            //importExport.export();
 
             LoadList();
         }
