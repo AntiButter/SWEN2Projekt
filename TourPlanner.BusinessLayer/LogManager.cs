@@ -24,11 +24,11 @@ namespace TourPlanner.BusinessLayer
             tourLogDataAccess.deleteLog((int)log.LogID);
         }
 
-        public void changeLog(TourLogs log, string? comment, int difficulty, int totalTime, int rating, int TourID)
+        public void changeLog(int id, string? comment, int difficulty, int totalTime, int rating, int TourID)
         {
             TourLogs newLog = new(comment, difficulty, totalTime, rating, TourID);
 
-            tourLogDataAccess.changeLog((int)log.LogID, newLog);
+            tourLogDataAccess.changeLog(id, newLog);
         }
     }
 }

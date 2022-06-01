@@ -27,6 +27,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private TourManager tourManager;
         private LogManager logManager;
         private ImportExport importExport;
+        public  TourPlanner.Models.TourLogs CurrentLog { get; set; }
 
         private Tour? currentItem;
         private ICommand searchCommand;
@@ -97,6 +98,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         }
         public TourPlannerViewModel()
         {
+            logManager = new LogManager();
             tourGetter = new TourGetter();
             tourManager = new TourManager();
             Items = new ObservableCollection<Tour>();
@@ -173,7 +175,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
                 return;
             }
 
-            TourLogs tourLogs = new TourLogs(true,(int)CurrentItem.ID);
+            TourLogs tourLogs = new TourLogs((int)CurrentItem.ID);
             tourLogs.ShowDialog();
 
             Items.Clear();
@@ -182,12 +184,26 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         public void deleteTourLog(object commandParameter)
         {
-
+            logManager.deleteLog(CurrentLog);
+            Items.Clear();
+            LoadList();
         }
 
         public void editTourLog(object commandParameter)
         {
+            if (currentItem == null)
+            {
+                //log
+                //make it more MVVM friendly
+                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                return;
+            }
 
+            TourLogs tourLogs = new TourLogs((int)CurrentLog.LogID,CurrentLog.Comment,CurrentLog.Difficulty,CurrentLog.TotalTime,CurrentLog.Rating,(int)CurrentItem.ID);
+            tourLogs.ShowDialog();
+
+            Items.Clear();
+            LoadList();
         }
         private void Search(object commandParameter)
         {

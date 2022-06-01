@@ -20,10 +20,16 @@ namespace TourPlanner_Lercher_Polley
     /// </summary>
     public partial class TourLogs : Window
     {
-        public TourLogs(bool decider,int ID)
+        public TourLogs(int IDTour)
         {
             InitializeComponent();
-            this.DataContext = new TourLogsViewModel(decider, ID);
+            this.DataContext = new TourLogsViewModel(IDTour);
+        }
+
+        public TourLogs(int id, string? comment, int difficulty, int totalTime, int rating, int TourID)
+        {
+            InitializeComponent();
+            this.DataContext = new EditTourLogsViewModel(id,comment,difficulty,totalTime,rating,TourID);
         }
     }
 }

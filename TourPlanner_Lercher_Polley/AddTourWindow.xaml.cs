@@ -19,6 +19,8 @@ namespace TourPlanner_Lercher_Polley
     /// <summary>
     /// Interaction logic for AddTourWindow.xaml
     /// </summary>
+    ///
+    
     public partial class AddTourWindow : Window
     {
         public AddTourWindow()
@@ -34,3 +36,4 @@ namespace TourPlanner_Lercher_Polley
         }
     }
 }
+

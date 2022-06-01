@@ -23,9 +23,9 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public int oldID { get; set; }
         public TransportType TransportType { get; set; }
         private TourManager tourManager;
-        private ICommand createTourCommand;
+        private ICommand tourChangerCommand;
 
-        public ICommand CreateTourCommand => createTourCommand ??= new RelayCommand(CreateTour);
+        public ICommand TourChangerCommand => tourChangerCommand ??= new RelayCommand(EditTour);
 
 
         public EditTourViewModel(int ID, string name, string to, string from, string description, TransportType type)
@@ -40,7 +40,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         }
 
 
-        private void CreateTour(object commandParameter)
+        private void EditTour(object commandParameter)
         {
             tourManager = new TourManager();
 
