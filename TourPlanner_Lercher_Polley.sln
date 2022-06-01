@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		UINotes.txt = UINotes.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourPlanner.UnitTests", "TourPlanner.UnitTests\TourPlanner.UnitTests.csproj", "{35F675D3-E1E7-4035-B82A-2A7D98821A56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{6D7B9FCC-18F3-4A6B-84F3-076FC2F6D227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D7B9FCC-18F3-4A6B-84F3-076FC2F6D227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D7B9FCC-18F3-4A6B-84F3-076FC2F6D227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35F675D3-E1E7-4035-B82A-2A7D98821A56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35F675D3-E1E7-4035-B82A-2A7D98821A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35F675D3-E1E7-4035-B82A-2A7D98821A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35F675D3-E1E7-4035-B82A-2A7D98821A56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
