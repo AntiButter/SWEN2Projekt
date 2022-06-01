@@ -51,5 +51,34 @@ namespace TourPlanner.UnitTests
             //assert
 
         }
+        public void test_export_onlyTour()
+        {
+            //check the distancePenalty function, which calculates a malus for the Child Friendliness
+
+            //arrange
+            //Tour testTour = new Tour()
+
+
+            //act
+
+
+            //assert
+
+        }
+
+        public void test_export_tourWithLogs()
+        {
+            //check the distancePenalty function, which calculates a malus for the Child Friendliness
+
+            //arrange
+            //Tour testTour = new Tour()
+
+
+            //act
+
+
+            //assert
+
+        }
     }
 }

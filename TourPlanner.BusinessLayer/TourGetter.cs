@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using TourPlanner.DataAccessLayer;
 using TourPlanner.Models;
 
@@ -35,11 +36,28 @@ namespace TourPlanner.BusinessLayer
             return tours;
         }
 
-        public string getPicture(int ID)
+        public BitmapImage getPicture(int ID)
         {
-            string pictureString = Path.GetFullPath("../../../../Pictures/TourID" + ID + ".png");
+            string pictureString;
+            string path = "../../../../Pictures/TourID" + ID + ".png";
 
-            return pictureString;
+            if (File.Exists(path))
+            {
+                pictureString = path;
+            }
+            else
+            {
+                pictureString = "../../../../Pictures/filler.png";
+            }
+
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            image.UriSource = new Uri(Path.GetFullPath(pictureString));
+            image.EndInit();
+
+            return image;
         }
 
         public void calculateParameters(IEnumerable<Tour> tours)

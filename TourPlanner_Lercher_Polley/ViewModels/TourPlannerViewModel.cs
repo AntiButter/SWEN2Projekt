@@ -40,7 +40,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private ICommand editTourLogCommand;
         private ICommand editTourCommand;
         private string searchName;
-        private string tourPicture;
+        private BitmapImage tourPicture;
 
         public ICommand SearchCommand => searchCommand ??= new RelayCommand(Search);
         public ICommand ClearListCommand => clearListCommand ??= new RelayCommand(ClearList);
@@ -86,7 +86,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             }
         }
 
-        public string TourPicture
+        public BitmapImage TourPicture
         {
             get { return tourPicture; }
             set 
@@ -156,9 +156,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         private void editTour(object commandParameter)
         {
-             
             AddTourWindow editTourWindow = new AddTourWindow((int)currentItem.ID,currentItem.Name, currentItem.To, currentItem.From,
-                currentItem.Description, currentItem.TransportType);
+                currentItem.Description, currentItem.TransportType);            
             editTourWindow.ShowDialog();
 
             Items.Clear();
