@@ -42,11 +42,11 @@ namespace TourPlanner.BusinessLayer
             tourDataAccess.deleteTour((int)tour.ID);
         }        
      
-        public void changeTour(Tour oldTour, string name, string? description, string from, string to, TransportType transportType)
+        public void changeTour(int oldID, string name, string? description, string from, string to, TransportType transportType)
         {
             Tour changedTour = new Tour(name, description, from, to, transportType);
 
-            changedTour.setID((int)oldTour.ID);
+            changedTour.setID(oldID); 
 
             mapQuestAPIRequest(changedTour);
 

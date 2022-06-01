@@ -36,7 +36,9 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private ICommand createSummarizeReportCommand;
         private ICommand addTourLogCommand;
         private ICommand deleteTourLogCommand;
+        private ICommand deleteTourCommand;
         private ICommand editTourLogCommand;
+        private ICommand editTourCommand;
         private string searchName;
         private string tourPicture;
 
@@ -48,6 +50,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public ICommand AddTourLogCommand => addTourLogCommand ??= new RelayCommand(addTourLog);
         public ICommand DeleteTourLogCommand => deleteTourLogCommand ??= new RelayCommand(deleteTourLog);
         public ICommand EditTourLogCommand => editTourLogCommand ??= new RelayCommand(editTourLog);
+        public ICommand DeleteTourCommand => deleteTourCommand ??= new RelayCommand(deleteTour);
+        public ICommand EditTourCommand => editTourCommand ??= new RelayCommand(editTour);
 
 
 
@@ -138,6 +142,24 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             AddTourWindow addTourWindow = new AddTourWindow();
             addTourWindow.ShowDialog();
+
+            Items.Clear();
+            LoadList();
+        }
+
+        private void deleteTour(object commandParameter)
+        {
+            tourManager.deleteTour(currentItem);
+            Items.Clear();
+            LoadList();
+        }
+
+        private void editTour(object commandParameter)
+        {
+             
+            AddTourWindow editTourWindow = new AddTourWindow((int)currentItem.ID,currentItem.Name, currentItem.To, currentItem.From,
+                currentItem.Description, currentItem.TransportType);
+            editTourWindow.ShowDialog();
 
             Items.Clear();
             LoadList();

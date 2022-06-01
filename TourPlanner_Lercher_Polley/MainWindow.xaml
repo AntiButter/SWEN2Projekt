@@ -92,6 +92,9 @@
                           Binding="{Binding Comment}"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <Button Content="Delete" Background="Red" Margin="10,131,400,-1" Grid.Row="5" Command="{Binding DeleteTourCommand}" Grid.ColumnSpan="2" />
+            <Button Content="Edit" Background="LightSlateGray" Margin="228,131,338,-1" Grid.Row="5" Command="{Binding EditTourCommand}" Grid.Column="1" />
+
             <Button Content="Add Log" Background="Aquamarine" Grid.ColumnSpan="2" Margin="10,181,613,-49" Grid.Row="5" Command="{Binding AddTourLogCommand}" ></Button>
             <Button Content="Edit Log" Background="GreenYellow" Margin="24,181,513,-49" Grid.Row="5" Command="{Binding EditTourLogCommand}" Grid.Column="1" />
             <Button Content="Delete Log" Background="Red" Margin="137,181,400,-50" Grid.Row="5" Command="{Binding DeleteTourLogCommand}" Grid.Column="1" />

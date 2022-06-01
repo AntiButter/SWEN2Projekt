@@ -13,14 +13,13 @@ using System.Windows.Controls;
 
 namespace TourPlanner_Lercher_Polley.ViewModels
 {
-    public class AddTourViewModel : ViewModelBase
+    public class EditTourViewModel : ViewModelBase
     {
         public string TourName { get; set; }
         public string TourTo { get; set; }
         public string TourFrom { get; set; }
         public string TourDescription { get; set; }
         public string ButtonType { get; set; }
-        public bool Edit { get; set; }
         public int oldID { get; set; }
         public TransportType TransportType { get; set; }
         private TourManager tourManager;
@@ -29,16 +28,24 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public ICommand CreateTourCommand => createTourCommand ??= new RelayCommand(CreateTour);
 
 
-
-        public AddTourViewModel()
+        public EditTourViewModel(int ID, string name, string to, string from, string description, TransportType type)
         {
-            ButtonType = "Create Tour";
+            oldID = ID;
+            TourName = name;
+            TourTo = to;
+            TourFrom = from;
+            TourDescription = description;
+            TransportType = type;
+            ButtonType = "Edit Tour";
         }
+
 
         private void CreateTour(object commandParameter)
         {
             tourManager = new TourManager();
-            tourManager.addNewTour(TourName, TourDescription, TourFrom, TourTo, TransportType);
+
+            tourManager.changeTour(oldID, TourName, TourDescription, TourFrom, TourTo, TransportType);
+
 
 
 
