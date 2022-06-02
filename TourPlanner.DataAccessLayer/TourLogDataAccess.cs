@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TourPlanner.DataAccessLayer.Interfaces;
 using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer
 {
-    public class TourLogDataAccess
+    public class TourLogDataAccess : ITourLogDataAccess
     {
         private DB dataAccess;
         public TourLogDataAccess()

@@ -118,7 +118,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
 
             //importExport = new ImportExport();
-            //importExport.export();
+            //string result = importExport.export();
+            //importExport.save(result);
 
             LoadList();
         }

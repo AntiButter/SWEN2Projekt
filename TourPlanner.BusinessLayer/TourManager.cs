@@ -11,7 +11,16 @@ namespace TourPlanner.BusinessLayer
 {
     public class TourManager
     {
-        private TourDataAccess tourDataAccess = new TourDataAccess();
+        private ITourDataAccess tourDataAccess;
+
+        public TourManager()
+        {
+            tourDataAccess = new TourDataAccess();
+        }        
+        public TourManager(ITourDataAccess dataAccessMockable)
+        {
+            tourDataAccess = dataAccessMockable;
+        }
 
         public void addNewTour (string name, string? description, string from, string to, TransportType transportType)
         {

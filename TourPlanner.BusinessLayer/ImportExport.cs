@@ -12,9 +12,18 @@ namespace TourPlanner.BusinessLayer
 {
     public class ImportExport
     {
-        private TourDataAccess tourDataAccess = new TourDataAccess();
+        private ITourDataAccess tourDataAccess;
 
-        public void export()
+        public ImportExport()
+        {
+            tourDataAccess = new TourDataAccess();
+        }        
+        public ImportExport(ITourDataAccess dataAccessMockable)
+        {
+            tourDataAccess = dataAccessMockable;
+        }
+
+        public string export()
         {
             IEnumerable<Tour> allTours = tourDataAccess.GetItems();
 
@@ -39,36 +48,19 @@ namespace TourPlanner.BusinessLayer
                                             new JProperty("rating", l.Rating),
                                             new JProperty("totaltime", l.TotalTime))))))));
 
-            /*
-            JObject exportJSON =
-                new JObject(
-                    new JProperty("channel",
-                        new JObject(
-                            new JProperty("title", "James Newton-King"),
-                            new JProperty("link", "http://james.newtonking.com"),
-                            new JProperty("description", "James Newton-King's blog."),
-                            new JProperty("item", "test"))));
-                            
-                                new JArray(
-                                    from p in posts
-                                    orderby p.Title
-                                    select new JObject(
-                                        new JProperty("title", p.Title),
-                                        new JProperty("description", p.Description),
-                                        new JProperty("link", p.Link),
-                                        new JProperty("category",
-                                            new JArray(
-                                                from c in p.Categories
-                                                select new JValue(c)))))))));
-                            */
-            File.WriteAllText("../../../../ExportFiles/Export"+ DateTime.Now.ToString("_yyyyMMdd_HHmmss") + ".txt", exportJSON.ToString());
-
+            return exportJSON.ToString();
+        }  
+        
+        public void save(string exportJSON)
+        {
             //add current timestamp to export
-
-        }        
+            File.WriteAllText("../../../../ExportFiles/Export" + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + ".txt", exportJSON.ToString());
+        }
         public void import()
         {
             throw new NotImplementedException();    
         }
+
+
     }
 }

@@ -7,7 +7,7 @@ using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer
 {
-    public class TourDataAccess
+    public class TourDataAccess : ITourDataAccess
     {
         private DB dataAccess;
         public TourDataAccess()

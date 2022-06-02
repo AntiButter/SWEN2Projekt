@@ -6,14 +6,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using TourPlanner.DataAccessLayer;
+using TourPlanner.DataAccessLayer.Interfaces;
 using TourPlanner.Models;
 
 namespace TourPlanner.BusinessLayer
 {
     public class TourGetter
     {
-        private TourDataAccess tourDataAccess = new TourDataAccess();
-        private TourLogDataAccess tourLogDataAccess = new TourLogDataAccess();
+        private ITourDataAccess tourDataAccess;
+        private ITourLogDataAccess tourLogDataAccess;
+
+        public TourGetter()
+        {
+            tourDataAccess = new TourDataAccess();
+            tourLogDataAccess = new TourLogDataAccess();
+        }
+        public TourGetter(ITourDataAccess dataAccessTourMockable, ITourLogDataAccess dataAccessLogMockable)
+        {
+            tourDataAccess = dataAccessTourMockable;
+            tourLogDataAccess = dataAccessLogMockable;
+        }
 
         public IEnumerable<Tour> Search(string itemName)
         {
@@ -98,7 +110,7 @@ namespace TourPlanner.BusinessLayer
 
             tour.setChildFriendliness(childFriendliness);
         }
-        private int difficultyPenalty(Tour tour)
+        public int difficultyPenalty(Tour tour)
         {
 
             //calculate average difficulty from all logs
@@ -121,7 +133,7 @@ namespace TourPlanner.BusinessLayer
             return subtractorValue;
         }
 
-        private int timePenalty(Tour tour)
+        public int timePenalty(Tour tour)
         {
             int subtractor = 0;
 
@@ -149,7 +161,7 @@ namespace TourPlanner.BusinessLayer
 
             return subtractor;
         }        
-        private int distancePenalty(Tour tour)
+        public int distancePenalty(Tour tour)
         {
             int subtractorValueDistance = 0;
 
