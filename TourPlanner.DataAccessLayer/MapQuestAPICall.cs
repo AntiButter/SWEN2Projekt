@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer
@@ -14,11 +15,28 @@ namespace TourPlanner.DataAccessLayer
     {
         Tour currentTour;
 
-        public MapQuestAPICall(Tour tour)
+        public bool callAPI(Tour tour)
         {
+
             currentTour = tour;
-            var test = GetContent();
-            Task.WaitAll(test);
+
+            try
+            {
+                var test = GetContent();
+                Task.WaitAll(test);
+
+                if(test.Result == null)
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("FEHLER: Unbekannter Fehler \n\n" +
+                    "Bitte überprüfen Sie ihre Eingabedaten und versuchen Sie es erneut!");
+
+                return false;
+            }
+
+            return true;
         }
 
         public async Task<JObject> GetContent()
@@ -50,17 +68,27 @@ namespace TourPlanner.DataAccessLayer
             JObject pageContent = JObject.Parse(await response.Content.ReadAsStringAsync());
 
 
-            //results
-            double distanceMiles = (int)pageContent.SelectToken("route.distance");
-            //convert miles to km
-            double distance = distanceMiles * 1.60934;
-            distance = Math.Round(distance,2); 
+            try
+            {
+                //results
+                double distanceMiles = (int)pageContent.SelectToken("route.distance");
+                //convert miles to km
+                double distance = distanceMiles * 1.60934;
+                distance = Math.Round(distance,2); 
 
-            //time
-            string time = (string)pageContent.SelectToken("route.formattedTime");
+                //time
+                string time = (string)pageContent.SelectToken("route.formattedTime");
 
-            //save in Tour object
-            currentTour.addMapQuestData(distance, time);
+                //save in Tour object
+                currentTour.addMapQuestData(distance, time);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("FEHLER: Die Tour ist zu lang, oder einer der Orte konnte nicht gefunden werden!\n\n" +
+                    "Bitte überprüfen Sie ihre Eingabedaten und versuchen Sie es erneut!");
+
+                return null;
+            }
 
 
             //Static API

@@ -28,6 +28,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             TourID = IDTour;
             ButtonContent = "Add Log";
+            logManager = new LogManager();
         }
         
         public void AddLog(object commandParameter)

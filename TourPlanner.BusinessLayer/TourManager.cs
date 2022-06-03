@@ -22,23 +22,31 @@ namespace TourPlanner.BusinessLayer
             tourDataAccess = dataAccessMockable;
         }
 
-        public void addNewTour (string name, string? description, string from, string to, TransportType transportType)
+        public bool addNewTour (string name, string? description, string from, string to, TransportType transportType)
         {
             Tour newTour = new Tour(name, description, from, to, transportType);
 
             //get (and reserve) the next value from the DB and set it to the object (for picture file naming)
             newTour.setID(tourDataAccess.getNextValTour());
 
-            mapQuestAPIRequest(newTour);
+            if(mapQuestAPIRequest(newTour))
+            {
+                addTourToDB(newTour);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
-            addTourToDB(newTour);
         }
 
-        private void mapQuestAPIRequest (Tour tour)
+        private bool mapQuestAPIRequest (Tour tour)
         {
-            _ = new MapQuestAPICall(tour);  
+            MapQuestAPICall mapQuestAPICall = new MapQuestAPICall();
+            
 
-            //throw new NotImplementedException("ende");
+            return mapQuestAPICall.callAPI(tour); ;
         }
 
         private void addTourToDB(Tour tour)

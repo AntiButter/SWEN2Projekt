@@ -135,7 +135,7 @@ namespace TourPlanner.DataAccessLayer
             {
                 sql.Parameters.AddWithValue("tourid", tour.ID);
                 sql.Parameters.AddWithValue("name", tour.Name);
-                sql.Parameters.AddWithValue("description", tour.Description);
+                sql.Parameters.AddWithValue("description", tour.Description.ToString());
                 sql.Parameters.AddWithValue("from", tour.From);
                 sql.Parameters.AddWithValue("to", tour.To);
                 sql.Parameters.AddWithValue("transportType", tour.TransportType.ToString());

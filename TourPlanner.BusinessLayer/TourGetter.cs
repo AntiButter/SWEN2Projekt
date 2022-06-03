@@ -81,7 +81,7 @@ namespace TourPlanner.BusinessLayer
             }
         }
 
-        private void calculateChildFriendliness(Tour tour)
+        public void calculateChildFriendliness(Tour tour)
         {
             //base Friendliness is 5, any negatives will abduct from that value
             int childFriendliness = 5;
@@ -178,7 +178,7 @@ namespace TourPlanner.BusinessLayer
         }
 
 
-        private void calculatePopularity(Tour tour)
+        public void calculatePopularity(Tour tour)
         {
             int popularity = 1;
 
@@ -189,8 +189,8 @@ namespace TourPlanner.BusinessLayer
             }
 
             //get the amount of all tour logs and compare it to the amount of logs in this tour
-            int logAmountAll = tourLogDataAccess.getTourLogAmountTotal();
-            int logAmountThisTour = tour.Logs.Count();
+            double logAmountAll = tourLogDataAccess.getTourLogAmountTotal();
+            double logAmountThisTour = tour.Logs.Count();
 
             double percent = (logAmountThisTour / logAmountAll) * 100;
 

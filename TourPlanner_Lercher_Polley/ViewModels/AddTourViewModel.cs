@@ -18,7 +18,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public string TourName { get; set; }
         public string TourTo { get; set; }
         public string TourFrom { get; set; }
-        public string TourDescription { get; set; }
+        public string? TourDescription { get; set; }
         public string ButtonType { get; set; }
         public bool Edit { get; set; }
         public int oldID { get; set; }
@@ -38,14 +38,24 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private void CreateTour(object commandParameter)
         {
             tourManager = new TourManager();
-            tourManager.addNewTour(TourName, TourDescription, TourFrom, TourTo, TransportType);
 
-
-
-                foreach (Window item in Application.Current.Windows)
+            if (TourDescription == null)
+                TourDescription = "";
+            
+            if(tourManager.addNewTour(TourName, TourDescription, TourFrom, TourTo, TransportType))
             {
-                if (item.DataContext == this) item.Close();
+                //success, close the window
+                foreach (Window item in Application.Current.Windows)
+                {
+                    if (item.DataContext == this) item.Close();
+                }
             }
+            else
+            {
+                //failure, dont close the window, user should be able to change the Input and try again
+                return;
+            }
+
         }
 
 
