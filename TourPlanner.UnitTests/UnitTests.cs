@@ -42,6 +42,8 @@ namespace TourPlanner.UnitTests
 
             var mockTourDataAccess = new Mock<ITourDataAccess>();
             mockTourDataAccess.Setup(x => x.GetItems()).Returns(Tourlist);
+            mockTourDataAccess.Setup(x => x.getNextValTour()).Returns(-2);
+            mockTourDataAccess.Setup(x => x.addTourToDB(It.IsAny<Tour>()));
 
             var mockTourLogDataAccess = new Mock<ITourLogDataAccess>();
             mockTourLogDataAccess.Setup(x => x.getTourLogAmountTotal()).Returns(20); //Returns that 20 logs exist, arbitrary amount chosen for popularity calculation in Test
@@ -468,6 +470,54 @@ namespace TourPlanner.UnitTests
             Assert.AreEqual(false, result);
         }
 
-        //unique feature beide
+       [Test]
+       public void test_randomNumber()
+        {
+            //tests if the logic of the randomNumber function works as expected (if the number is always inside the given range)
+
+            //arrange
+            List<int> randomList = new List<int>();
+            int check = 0;
+
+            //act
+            //randomly add 100 numbers, from 0-9
+            for (int i = 0; i < 100; i++)
+            {
+                randomList.Add(randomTourFile.randomNumber(0, 10));
+            }
+
+            //assert
+            for (int i = 0; i < 100; i++)
+            {
+                if (randomList[i] >= 0 && randomList[i] <= 9)
+                {
+                    check++;
+                }
+            }
+
+            Assert.AreEqual(100, check);
+        }
+
+        [Test]
+        public void test_callAPI_randomTour()
+        {
+            //check how the API responds with correct data inout
+
+            //arrange
+
+            //act
+            bool result = tourManager.randomTour("testTour", "Wien", Models.Enum.TransportType.running);
+
+            //assert
+            if(result == false)
+            {
+                Assert.Warn("Repeat Test, Random Location was too far away");
+            }
+            else
+            {
+                Assert.AreEqual(true, result);
+            }
+
+        }
     }
 }

@@ -69,5 +69,19 @@ namespace TourPlanner.BusinessLayer
 
             tourDataAccess.changeTour(changedTour);
         }
+
+        public bool randomTour(string name, string from, TransportType transportType)
+        {
+            string to = "";
+
+            to = randomTourFile.getRandomLocation();
+
+            if(addNewTour(name, "", from, to, transportType) == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

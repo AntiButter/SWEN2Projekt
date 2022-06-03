@@ -17,6 +17,7 @@ using TourPlanner_Lercher_Polley.ViewModels;
 using System.Windows.Controls;
 using System.Threading;
 using System.Windows;
+using TourPlanner.Logging;
 
 namespace TourPlanner_Lercher_Polley.ViewModels
 {
@@ -102,24 +103,6 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             tourGetter = new TourGetter();
             tourManager = new TourManager();
             Items = new ObservableCollection<Tour>();
-
-            //test
-            //tourCreator.addNewTour("Test0805", "Wiener Spaziergang", "Eisenstadt", "Gramadneusiedl", TransportType.running);
-
-            //Tour testTour = new Tour("aaa", "Wiener asd", "Eisenstadt", "Gramadneusiedl", TransportType.running);
-            //testTour.setID(99);
-            //tourManager.changeTour(testTour, "Test0805", "Wiener Spaziergang", "Eisenstadt", "Gramadneusiedl", TransportType.running);
-
-            //logManager = new LogManager();
-            //logManager.addNewLog("", 5, 100, 5, 28);
-            //TourPlanner.Models.TourLogs testLog = new TourPlanner.Models.TourLogs("", 5, 100, 5, 28);
-            //testLog.setID(8);
-            //logManager.changeLog(testLog, "change test", 3, 100, 5, 28);
-
-
-            //importExport = new ImportExport();
-            //string result = importExport.export();
-            //importExport.save(result);
 
             LoadList();
         }
