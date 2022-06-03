@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TourPlanner.Logging;
 using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer
@@ -32,6 +33,8 @@ namespace TourPlanner.DataAccessLayer
             {
                 MessageBox.Show("FEHLER: Unbekannter Fehler \n\n" +
                     "Bitte überprüfen Sie ihre Eingabedaten und versuchen Sie es erneut!");
+
+                Logger.Error("Unbekannter Fehler beim Aufruf der MapQuestAPI");
 
                 return false;
             }
@@ -85,6 +88,9 @@ namespace TourPlanner.DataAccessLayer
             catch (Exception ex)
             {
                 MessageBox.Show("FEHLER: Die Tour ist zu lang, oder einer der Orte konnte nicht gefunden werden!\n\n" +
+                    "Bitte überprüfen Sie ihre Eingabedaten und versuchen Sie es erneut!");
+
+                Logger.Error("FEHLER: Die Tour ist zu lang, oder einer der Orte konnte nicht gefunden werden!\n\n" +
                     "Bitte überprüfen Sie ihre Eingabedaten und versuchen Sie es erneut!");
 
                 return null;

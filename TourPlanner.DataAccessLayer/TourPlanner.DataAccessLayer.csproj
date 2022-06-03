@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Models\TourPlanner.Models.csproj" />
+    <ProjectReference Include="..\TourPlanner.Logging\TourPlanner.Logging.csproj" />
   </ItemGroup>
 
 </Project>

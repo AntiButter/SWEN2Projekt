@@ -5,6 +5,7 @@ using System.Windows;
 using TourPlanner.Models;
 using TourPlanner.Models.Enum;
 using Microsoft.Extensions.Configuration;
+using TourPlanner.Logging;
 
 namespace TourPlanner.DataAccessLayer
 {
@@ -15,8 +16,6 @@ namespace TourPlanner.DataAccessLayer
         private static NpgsqlConnection Connection;
         private static DB instance;
         
-        //private  IConfiguration config = new ConfigurationBuilder();
-
         public static DB getInstance()
         {
             if (instance == null)
@@ -31,6 +30,7 @@ namespace TourPlanner.DataAccessLayer
             //databaseConfig = "Host=localhost;Username=postgres;Password=tour;Database=postgres";
             databaseConfig = ConfigAccess.getDatabaseString();
             Connection = new NpgsqlConnection(databaseConfig);
+            Logger.Info("Database connection was setup");
 
         }
 
@@ -45,7 +45,7 @@ namespace TourPlanner.DataAccessLayer
                 MessageBox.Show("FEHLER: " + ex.Message + "\n\n" +
                     "Bitte überprüfen Sie ob es Probleme mit der Datenbank, oder Fehler im config file gibt");
 
-                //log error in future
+                Logger.Fatal("Database connection error\nMessage: "+ex.Message);
 
                 Environment.Exit(0);
             }
@@ -54,7 +54,7 @@ namespace TourPlanner.DataAccessLayer
                 MessageBox.Show("FEHLER: " + ex.Message + "\n\n" +
                     "Bitte überprüfen Sie ob es Probleme mit der Datenbank, oder Fehler im config file gibt");
 
-                //log error in future
+                Logger.Fatal("Database connection error\nMessage: " + ex.Message);
 
                 Environment.Exit(0);
             }
@@ -187,34 +187,6 @@ namespace TourPlanner.DataAccessLayer
                 return tourLogList;
             }
         }
-        /*
-        public List<TourLogs> getAllTourLogs()
-        {
-            Connect();
-            using (var sql = new NpgsqlCommand("SELECT * FROM tourlogs ORDER BY logid ASC", Connection))
-            {
-                NpgsqlDataReader reader = sql.ExecuteReader();
-
-                List<TourLogs> tourLogList = null;
-
-                if (reader.HasRows)
-                {
-                    tourLogList = new List<TourLogs>();
-                    while (reader.Read())
-                    {
-                        string? comment = UtilityFunctions.checkNull(reader["comment"].ToString());
-
-
-
-                        tourLogList.Add(new TourLogs(reader["logtime"].ToString(), comment, (int)reader["difficulty"], (int)reader["totaltime"], (int)reader["rating"], (int)reader["logid"], (int)reader["touridfk"]));
-                    }
-                }
-
-                Disconnect();
-                return tourLogList;
-            }
-        }
-        */
 
         public void deleteTour(int tourid)
         {
@@ -225,6 +197,8 @@ namespace TourPlanner.DataAccessLayer
                 sql.ExecuteNonQuery();
             }
             Disconnect();
+
+            Logger.Info("Tour with ID:"+tourid+" was deleted");
         }        
         public void deleteTourLog(int logid)
         {
@@ -235,6 +209,8 @@ namespace TourPlanner.DataAccessLayer
                 sql.ExecuteNonQuery();
             }
             Disconnect();
+
+            Logger.Info("Tour with ID:" + logid + " was deleted");
         }
 
         public void changeTourDB(Tour tour)
@@ -253,6 +229,8 @@ namespace TourPlanner.DataAccessLayer
                 sql.ExecuteNonQuery();
             }
             Disconnect();
+
+            Logger.Info("Tour with ID:" + tour.ID + " was changed");
         }
 
         public void changeLogDB(int oldLogID, TourLogs log)
@@ -268,6 +246,8 @@ namespace TourPlanner.DataAccessLayer
                 sql.ExecuteNonQuery();
             }
             Disconnect();
+
+            Logger.Info("Log with ID:" + oldLogID + " was changed");
         }
     }
 }

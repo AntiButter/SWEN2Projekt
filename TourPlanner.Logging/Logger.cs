@@ -9,12 +9,21 @@ namespace TourPlanner.Logging
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static void Log(string String)
+        public static void Info(string String)
         {
             log.Info(String);
-            log.Error("Error");
-
-            Console.WriteLine("cock");
+        }        
+        public static void Error(string String)
+        {
+            log.Error(String);
+        }        
+        public static void Warn(string String)
+        {
+            log.Warn(String);
+        }        
+        public static void Fatal(string String)
+        {
+            log.Fatal(String);
         }
     }
 }

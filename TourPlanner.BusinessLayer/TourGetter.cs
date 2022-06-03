@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using TourPlanner.DataAccessLayer;
 using TourPlanner.DataAccessLayer.Interfaces;
+using TourPlanner.Logging;
 using TourPlanner.Models;
 
 namespace TourPlanner.BusinessLayer
@@ -34,9 +35,12 @@ namespace TourPlanner.BusinessLayer
             if(items == null)
                 return items;
             
-            //call getAllLogs and compare it too 
+            var searchResult = items.Where(x => x.Name.ToLower().Contains(itemName.ToLower()));
 
-            return items.Where(x => x.Name.ToLower().Contains(itemName.ToLower()));            
+            if (searchResult.Count() == 0)
+                Logger.Warn("No search results for \"" + itemName + "\" could be found");
+
+            return searchResult;
         }
 
         public IEnumerable<Tour> GetItems()
@@ -59,6 +63,7 @@ namespace TourPlanner.BusinessLayer
             }
             else
             {
+                Logger.Error("Picture for ID:" + ID + " could not be found, using filler.png as backup");
                 pictureString = "../../../../Pictures/filler.png";
             }
 

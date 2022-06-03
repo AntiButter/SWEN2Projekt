@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TourPlanner.Logging;
 
 namespace TourPlanner.DataAccessLayer
 {
@@ -16,6 +17,8 @@ namespace TourPlanner.DataAccessLayer
             string[] locations = File.ReadAllLines(filePath);
 
             string to = locations[randomNumber(0, locations.Length)];
+
+            Logger.Info(to+" was chosen as a random location");
 
             return to;
         }
