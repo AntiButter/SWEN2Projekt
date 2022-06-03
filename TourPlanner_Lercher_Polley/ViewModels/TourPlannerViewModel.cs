@@ -40,6 +40,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private ICommand deleteTourCommand;
         private ICommand editTourLogCommand;
         private ICommand editTourCommand;
+        private ICommand exportCommand;
         private string searchName;
         private BitmapImage tourPicture;
 
@@ -53,6 +54,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public ICommand EditTourLogCommand => editTourLogCommand ??= new RelayCommand(editTourLog);
         public ICommand DeleteTourCommand => deleteTourCommand ??= new RelayCommand(deleteTour);
         public ICommand EditTourCommand => editTourCommand ??= new RelayCommand(editTour);
+        public ICommand ExportCommand => exportCommand ??= new RelayCommand(Export);
 
 
 
@@ -249,6 +251,12 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             PDFGenerator.summarizeReport();
 
             //give feedback that the report was created
+        }
+
+        private void Export(object commandParameter)
+        {
+            importExport.save(importExport.export());
+
         }
     }
 }
