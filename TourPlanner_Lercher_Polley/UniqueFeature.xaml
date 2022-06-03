@@ -35,8 +35,6 @@
         <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding TourName , Mode=TwoWay}"></TextBox>
         <Label Grid.Column="0" Grid.Row="1" Content="From: "></Label>
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding TourFrom , Mode=TwoWay}"></TextBox>
-        <Label Grid.Column="0" Grid.Row="2" Content="To: "></Label>
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding TourTo , Mode=TwoWay}"></TextBox>
         <Label Grid.Column="0" Grid.Row="3" Content="Description: "></Label>
         <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding TourDescription , Mode=TwoWay}"></TextBox>
         <Label Grid.Column="0" Grid.Row="4" Content="Transport Type: "></Label>
