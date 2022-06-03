@@ -24,8 +24,10 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         public LogManager logManager { get; set; }
         private ICommand logCommand;
+        private ICommand cancelCommand;
 
         public ICommand LogCommand => logCommand ??= new RelayCommand(EditLog);
+        public ICommand CancelCommand => cancelCommand ??= new RelayCommand(Cancel);
 
         public EditTourLogsViewModel(int id, string? comment, int difficulty, int totalTime, int rating, int IDTour)
         {
@@ -44,6 +46,14 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             logManager.changeLog(ID,LogComment, LogDifficulty, LogTime, LogRating, TourID);
 
+            foreach (Window item in Application.Current.Windows)
+            {
+                if (item.DataContext == this) item.Close();
+            }
+        }
+
+        private void Cancel(object commandParameter)
+        {
             foreach (Window item in Application.Current.Windows)
             {
                 if (item.DataContext == this) item.Close();

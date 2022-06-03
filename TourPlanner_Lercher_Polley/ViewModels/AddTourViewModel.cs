@@ -11,6 +11,7 @@ using TourPlanner.BusinessLayer;
 using System.Windows;
 using System.Windows.Controls;
 
+
 namespace TourPlanner_Lercher_Polley.ViewModels
 {
     public class AddTourViewModel : ViewModelBase
@@ -37,6 +38,11 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         private void CreateTour(object commandParameter)
         {
+            if (String.IsNullOrWhiteSpace(TourName) || String.IsNullOrWhiteSpace(TourTo) || String.IsNullOrWhiteSpace(TourFrom))
+            {
+                MessageBox.Show("Fehler: " + "Bitte alle Felder außer Description ausfüllen.");
+                return;
+            }
             tourManager = new TourManager();
 
             if (TourDescription == null)
