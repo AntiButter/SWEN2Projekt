@@ -43,7 +43,11 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private void EditTour(object commandParameter)
         {
             tourManager = new TourManager();
-
+            if (String.IsNullOrWhiteSpace(TourName) || String.IsNullOrWhiteSpace(TourTo) || String.IsNullOrWhiteSpace(TourFrom))
+            {
+                MessageBox.Show("Fehler: " + "Bitte alle Felder außer Description ausfüllen.");
+                return;
+            }
             tourManager.changeTour(oldID, TourName, TourDescription, TourFrom, TourTo, TransportType);
 
 
