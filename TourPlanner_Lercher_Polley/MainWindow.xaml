@@ -14,7 +14,8 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -30,6 +31,7 @@
                 <Button Grid.Column="5" Width="80" Background="Yellow" Margin="15,0,0,0" Command="{Binding CreateTourReportCommand}" Content="Tour Report" Height="22" VerticalAlignment="Bottom"></Button>
                 <Button Grid.Column="6" Width="105" Background="Yellow" Margin="15,0,0,0" Command="{Binding CreateSummarizeReportCommand}" Content="Summarize Report"></Button>
                 <Button Grid.Column="7" Width="60" Background="MistyRose" Margin="15,0,0,0" Command="{Binding ExportCommand}" Content="Export"></Button>
+                <Button Grid.Column="8" Width="105" Background="LightGreen" Margin="15,0,0,0" Command="{Binding UniqueCommand}" Content="Random Tour"></Button>
             </Grid>
         </StackPanel>
         <ListBox x:Name="listMediaItems" ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem}" DisplayMemberPath="Name" Margin="0,60,0,0" Width="176" HorizontalAlignment="Left"/>

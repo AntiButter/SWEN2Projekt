@@ -48,6 +48,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
                 MessageBox.Show("Fehler: " + "Bitte alle Felder außer Description ausfüllen.");
                 return;
             }
+            if (TourDescription == null)
+                TourDescription = "";
             tourManager.changeTour(oldID, TourName, TourDescription, TourFrom, TourTo, TransportType);
 
 

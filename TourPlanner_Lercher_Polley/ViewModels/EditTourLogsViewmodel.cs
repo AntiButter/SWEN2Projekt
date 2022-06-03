@@ -44,6 +44,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         public void EditLog(object commandParameter)
         {
+            if (LogComment == null)
+                LogComment = "";
             logManager.changeLog(ID,LogComment, LogDifficulty, LogTime, LogRating, TourID);
 
             foreach (Window item in Application.Current.Windows)

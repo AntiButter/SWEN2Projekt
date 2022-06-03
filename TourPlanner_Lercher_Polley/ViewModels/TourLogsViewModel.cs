@@ -35,6 +35,13 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         
         public void AddLog(object commandParameter)
         {
+            if (LogComment == null)
+                LogComment = "";
+            if (LogTime == 0 || LogDifficulty < 1 || LogDifficulty > 5 || LogRating < 1 || LogRating > 5)
+            {
+                MessageBox.Show("Fehler: " + "Bitte geben sie in jedem Feld etwas ein. Difficulty 1-5 und Rating 1-5");
+                return;
+            }
             logManager.addNewLog(LogComment, LogDifficulty, LogTime, LogRating, TourID);
 
             foreach (Window item in Application.Current.Windows)

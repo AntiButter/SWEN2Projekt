@@ -42,6 +42,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         private ICommand editTourLogCommand;
         private ICommand editTourCommand;
         private ICommand exportCommand;
+        private ICommand uniqueCommand;
         private string searchName;
         private BitmapImage tourPicture;
 
@@ -56,6 +57,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public ICommand DeleteTourCommand => deleteTourCommand ??= new RelayCommand(deleteTour);
         public ICommand EditTourCommand => editTourCommand ??= new RelayCommand(editTour);
         public ICommand ExportCommand => exportCommand ??= new RelayCommand(Export);
+        public ICommand UniqueCommand => uniqueCommand ??= new RelayCommand(Unique);
 
 
 
@@ -135,6 +137,14 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             LoadList();
         }
 
+        private void Unique(object commandParameter)
+        {
+            UniqueFeature uniqueFeature = new UniqueFeature();
+            uniqueFeature.ShowDialog();
+
+            Items.Clear();
+            LoadList();
+        }
         private void deleteTour(object commandParameter)
         {
             tourManager.deleteTour(currentItem);

@@ -30,6 +30,6 @@
         <Label Grid.Row="3" Grid.Column="0" Content="Comment: "/>
         <TextBox Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Text="{Binding LogComment}" />
         <Button Grid.Column="0" Grid.Row="5" Command="{Binding LogCommand}" Content="{Binding ButtonContent}" Background="Green"/>
-        <Button Grid.Column="1" Grid.Row="5" Command="{Binding Cancel}" Content="CancelCommand" Background="Red"/>
+        <Button Grid.Column="1" Grid.Row="5" Command="{Binding CancelCommand}" Content="CancelCommand" Background="Red"/>
     </Grid>
 </Window>
