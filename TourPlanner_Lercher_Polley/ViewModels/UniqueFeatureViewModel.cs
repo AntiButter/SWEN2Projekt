@@ -33,7 +33,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         private void CreateTour(object commandParameter)
         {
-            if (String.IsNullOrWhiteSpace(TourName) || String.IsNullOrWhiteSpace(TourTo) || String.IsNullOrWhiteSpace(TourFrom))
+            if (String.IsNullOrWhiteSpace(TourName) || String.IsNullOrWhiteSpace(TourFrom))
             {
                 MessageBox.Show("Fehler: " + "Bitte alle Felder außer Description ausfüllen.");
                 return;
