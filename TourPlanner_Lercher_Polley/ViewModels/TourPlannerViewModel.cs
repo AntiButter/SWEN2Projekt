@@ -149,12 +149,26 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         }
         private void deleteTour(object commandParameter)
         {
+            if (currentItem == null)
+            {
+                //log
+                //make it more MVVM friendly
+                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                return;
+            }
             tourManager.deleteTour(currentItem);
             clearAll();
         }
 
         private void editTour(object commandParameter)
         {
+            if (currentItem == null)
+            {
+                //log
+                //make it more MVVM friendly
+                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                return;
+            }
             AddTourWindow editTourWindow = new AddTourWindow((int)currentItem.ID,currentItem.Name, currentItem.To, currentItem.From,
                 currentItem.Description, currentItem.TransportType);            
             editTourWindow.ShowDialog();
@@ -185,6 +199,13 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         public void deleteTourLog(object commandParameter)
         {
+            if (currentItem == null)
+            {
+                //log
+                //make it more MVVM friendly
+                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                return;
+            }
             logManager.deleteLog(CurrentLog);
 
             int oldID = (int)CurrentItem.ID;
@@ -196,6 +217,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         public void editTourLog(object commandParameter)
         {
+
             if (currentItem == null)
             {
                 //log
