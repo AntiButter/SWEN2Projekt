@@ -151,9 +151,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             if (currentItem == null)
             {
-                //log
-                //make it more MVVM friendly
                 MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                Logger.Error("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
                 return;
             }
             tourManager.deleteTour(currentItem);
@@ -164,9 +163,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             if (currentItem == null)
             {
-                //log
-                //make it more MVVM friendly
                 MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                Logger.Error("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
                 return;
             }
             AddTourWindow editTourWindow = new AddTourWindow((int)currentItem.ID,currentItem.Name, currentItem.To, currentItem.From,
@@ -184,9 +182,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             if (currentItem == null)
             {
                 MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
-
-                Logger.Error("Es wurde keine Tour ausgewählt, welcher ein Log hinzugefügt werden könnte");
-
+                Logger.Error("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
                 return;
             }
 
@@ -201,9 +197,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             if (currentItem == null)
             {
-                //log
-                //make it more MVVM friendly
                 MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                Logger.Error("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
                 return;
             }
             logManager.deleteLog(CurrentLog);
@@ -220,9 +215,8 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
             if (currentItem == null)
             {
-                //log
-                //make it more MVVM friendly
                 MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                Logger.Error("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
                 return;
             }
 
@@ -269,22 +263,21 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             if(currentItem == null)
             {
-                //log
-                //make it more MVVM friendly
                 MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                Logger.Error("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
                 return;
             }
 
             PDFGenerator.tourReport(currentItem);
 
-            //give feedback that the report was created
+            Logger.Info("Tour Report for Tour "+CurrentItem.Name+" has been created");
         }        
         private void CreateSummarizeReport(object commandParameter)
         {
 
             PDFGenerator.summarizeReport();
 
-            //give feedback that the report was created
+            Logger.Info("Summarize Report created");
         }
 
         private void Export(object commandParameter)
