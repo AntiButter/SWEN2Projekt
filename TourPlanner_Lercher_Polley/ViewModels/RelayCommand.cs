@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace TourPlanner_Lercher_Polley.ViewModels
 {
+
+    //Helper class, from Moodle course
+
     public class RelayCommand : ICommand
     {
         public event EventHandler CanExecuteChanged

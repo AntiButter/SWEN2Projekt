@@ -1,5 +1,5 @@
 ﻿
-//[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
+//log4net.config with the help of the Moodle course
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "../../../../Tourplanner.Logging/log4net.config")]
 
 namespace TourPlanner.Logging

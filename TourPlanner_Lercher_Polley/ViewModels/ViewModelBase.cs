@@ -5,6 +5,9 @@ using System.Runtime.CompilerServices;
 
 namespace TourPlanner_Lercher_Polley.ViewModels
 {
+
+    //Helper class, from Moodle course
+
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
