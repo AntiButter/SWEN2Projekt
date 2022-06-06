@@ -53,77 +53,7 @@ namespace TourPlanner.UnitTests
             tourGetter = new TourGetter(mockTourDataAccess.Object, mockTourLogDataAccess.Object);
         }
 
-        [Test]
-        public void test_checkNull()
-        {
-            //test custom function, that checks if a string is empty ( "" ), if it is, return null
-            //else, return the string back
-
-            //arrange
-            string notNull = "test";
-            string isNull =  "";
-            string? notNullReturn;
-            string? isNullReturn;
-
-
-            //act
-            notNullReturn = UtilityFunctions.checkNull(notNull);
-            isNullReturn = UtilityFunctions.checkNull(isNull);
-
-            //assert
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual("test", notNullReturn);
-                Assert.AreEqual(null, isNullReturn);
-            });
-        }
         
-        [Test]
-        public void test_difficultyPenaltyYes()
-        {
-            //check the difficultyPenalty function, which calculates a malus for the ChildFriendliness
-
-            //arrange
-            Tour test = new Tour(1, "testTour1", "testDescription1", "Wien", "Linz", Models.Enum.TransportType.running, 111.11, "111");
-            List<TourLogs> logsTest = new List<TourLogs>();
-            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 5, 80, 3, 1, 2)); //difficulty = 5
-            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 3, 80, 3, 1, 2)); //difficulty = 3
-            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 6, 80, 3, 1, 2)); //difficulty = 6
-            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 2, 80, 3, 1, 2)); //difficulty = 2
-            test.setLogs(logsTest);
-            //total average difficulty = (5+3+6+2)/4 = 16/4 = 4
-            //Because a difficulty of 1-2 should not be considered for child friendliness, and each point above 2 should increasingly affect child friendliness, the value of 4 is substracted by 2
-
-            //act
-            int penalty = tourGetter.difficultyPenalty(test);
-
-            //assert
-            Assert.AreEqual(2, penalty);
-        }        
-        
-        [Test]
-        public void test_difficultyPenaltyNo()
-        {
-            //check the difficultyPenalty function, which calculates a malus for the ChildFriendliness
-
-            //arrange
-            Tour test = new Tour(1, "testTour1", "testDescription1", "Wien", "Linz", Models.Enum.TransportType.running, 111.11, "111");
-            List<TourLogs> logsTest = new List<TourLogs>();
-            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 2, 80, 3, 1, 2)); //difficulty = 2
-            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 1, 80, 3, 1, 2)); //difficulty = 1
-            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 0, 80, 3, 1, 2)); //difficulty = 0
-            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 1, 80, 3, 1, 2)); //difficulty = 1
-            test.setLogs(logsTest);
-            //total average difficulty = (2+1+0+1)/4 = 4/4 = 1
-            //Because a difficulty of 1-2 should not be considered for child friendliness, and each point above 2 should increasingly affect child friendliness, the value of 1 is substracted by 2
-            //Because 1 substracted by 2 
-
-            //act
-            int penalty = tourGetter.difficultyPenalty(test);
-
-            //assert
-            Assert.AreEqual(0 ,penalty);
-        }
 
         [Test]
         public void test_distancePenalty()
@@ -188,6 +118,52 @@ namespace TourPlanner.UnitTests
         }
 
 
+        [Test]
+        public void test_difficultyPenaltyYes()
+        {
+            //check the difficultyPenalty function, which calculates a malus for the ChildFriendliness
+
+            //arrange
+            Tour test = new Tour(1, "testTour1", "testDescription1", "Wien", "Linz", Models.Enum.TransportType.running, 111.11, "111");
+            List<TourLogs> logsTest = new List<TourLogs>();
+            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 5, 80, 3, 1, 2)); //difficulty = 5
+            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 3, 80, 3, 1, 2)); //difficulty = 3
+            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 6, 80, 3, 1, 2)); //difficulty = 6
+            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 2, 80, 3, 1, 2)); //difficulty = 2
+            test.setLogs(logsTest);
+            //total average difficulty = (5+3+6+2)/4 = 16/4 = 4
+            //Because a difficulty of 1-2 should not be considered for child friendliness, and each point above 2 should increasingly affect child friendliness, the value of 4 is substracted by 2
+
+            //act
+            int penalty = tourGetter.difficultyPenalty(test);
+
+            //assert
+            Assert.AreEqual(2, penalty);
+        }        
+        
+        [Test]
+        public void test_difficultyPenaltyNo()
+        {
+            //check the difficultyPenalty function, which calculates a malus for the ChildFriendliness
+
+            //arrange
+            Tour test = new Tour(1, "testTour1", "testDescription1", "Wien", "Linz", Models.Enum.TransportType.running, 111.11, "111");
+            List<TourLogs> logsTest = new List<TourLogs>();
+            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 2, 80, 3, 1, 2)); //difficulty = 2
+            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 1, 80, 3, 1, 2)); //difficulty = 1
+            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 0, 80, 3, 1, 2)); //difficulty = 0
+            logsTest.Add(new TourLogs("testTimeStamp", "testComment", 1, 80, 3, 1, 2)); //difficulty = 1
+            test.setLogs(logsTest);
+            //total average difficulty = (2+1+0+1)/4 = 4/4 = 1
+            //Because a difficulty of 1-2 should not be considered for child friendliness, and each point above 2 should increasingly affect child friendliness, the value of 1 is substracted by 2
+            //Because 1 substracted by 2 
+
+            //act
+            int penalty = tourGetter.difficultyPenalty(test);
+
+            //assert
+            Assert.AreEqual(0 ,penalty);
+        }
         [Test]
         public void test_calculateChildFriendliness()
         {
@@ -300,6 +276,30 @@ namespace TourPlanner.UnitTests
             });
         }
 
+        [Test]
+        public void test_checkNull()
+        {
+            //test custom function, that checks if a string is empty ( "" ), if it is, return null
+            //else, return the string back
+
+            //arrange
+            string notNull = "test";
+            string isNull =  "";
+            string? notNullReturn;
+            string? isNullReturn;
+
+
+            //act
+            notNullReturn = UtilityFunctions.checkNull(notNull);
+            isNullReturn = UtilityFunctions.checkNull(isNull);
+
+            //assert
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual("test", notNullReturn);
+                Assert.AreEqual(null, isNullReturn);
+            });
+        }
         [Test]
         public void test_exportJSON()
         {

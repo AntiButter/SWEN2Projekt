@@ -9,7 +9,7 @@
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         xmlns:enum="clr-namespace:TourPlanner.Models.Enum;assembly=TourPlanner.Models"
         mc:Ignorable="d"
-        Title="Wicky  Wacky Random Tour" Height="150" Width="300">
+        Title="Wicky  Wacky Random Tour" Height="145" Width="300">
     <Window.Resources>
         <ObjectDataProvider x:Key="dataEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
             <ObjectDataProvider.MethodParameters>

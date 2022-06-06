@@ -12,6 +12,7 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using TourPlanner.Logging;
 using TourPlanner.Models;
 
 namespace TourPlanner.BusinessLayer
@@ -155,7 +156,7 @@ namespace TourPlanner.BusinessLayer
             }
             catch (Exception ex)
             {
-                //log
+                Logger.Error("Picture for Tour report could not be found, using placeholder image instead");
                 imageData = ImageDataFactory.Create("../../../../Pictures/filler.PNG");
             }
             document.Add(new Image(imageData));

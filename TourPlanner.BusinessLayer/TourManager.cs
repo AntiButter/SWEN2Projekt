@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.DataAccessLayer;
+using TourPlanner.Logging;
 using TourPlanner.Models;
 using TourPlanner.Models.Enum;
 
@@ -51,7 +52,8 @@ namespace TourPlanner.BusinessLayer
 
         private void addTourToDB(Tour tour)
         {
-            tourDataAccess.addTourToDB(tour);   
+            tourDataAccess.addTourToDB(tour);
+            Logger.Info("Tour \"" + tour.Name + "\" has been created");
         }
 
         public void deleteTour(Tour tour)

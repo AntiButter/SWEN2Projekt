@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:TourPlanner_Lercher_Polley.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TourPlannerViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="900">
+        Title="MainWindow" Height="630" Width="900">
     <Grid>
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <Border Background="GhostWhite" BorderBrush="Black" BorderThickness="3" Margin="0,0,0,4" Width="600" HorizontalAlignment="Left">

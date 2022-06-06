@@ -107,6 +107,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
             tourGetter = new TourGetter();
             tourManager = new TourManager();
             Items = new ObservableCollection<Tour>();
+            importExport = new ImportExport();
 
             LoadList();
 
@@ -195,10 +196,10 @@ namespace TourPlanner_Lercher_Polley.ViewModels
 
         public void deleteTourLog(object commandParameter)
         {
-            if (currentItem == null)
+            if (CurrentLog == null)
             {
-                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
-                Logger.Error("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst einen Log aus!");
+                Logger.Error("FEHLER: Bitte wählen Sie zuerst einen Log aus!");
                 return;
             }
             logManager.deleteLog(CurrentLog);
@@ -213,10 +214,10 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         public void editTourLog(object commandParameter)
         {
 
-            if (currentItem == null)
+            if (CurrentLog == null)
             {
-                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
-                Logger.Error("FEHLER: Bitte wählen Sie zuerst eine Tour aus!");
+                MessageBox.Show("FEHLER: Bitte wählen Sie zuerst einen Log aus!");
+                Logger.Error("FEHLER: Bitte wählen Sie zuerst einen Log aus!");
                 return;
             }
 
@@ -284,6 +285,7 @@ namespace TourPlanner_Lercher_Polley.ViewModels
         {
             importExport.save(importExport.export());
 
+            Logger.Info("Export of current data has been created");
         }
 
         private void getOldSelection(int id)
